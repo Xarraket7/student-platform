@@ -103,6 +103,7 @@ const Admin = {
       const slug = document.getElementById('admin-comm-slug').value;
       const desc = document.getElementById('admin-comm-desc').value;
       const iconFile = document.getElementById('admin-comm-icon').files[0];
+      const avatarFile = document.getElementById('admin-comm-avatar').files[0];
       const bgFile = document.getElementById('admin-comm-bg').files[0];
 
       if (!title || !slug) return showToast('Заполните название и ссылку');
@@ -112,6 +113,7 @@ const Admin = {
       formData.append('slug', slug);
       if (desc) formData.append('description', desc);
       if (iconFile) formData.append('icon', iconFile);
+      if (avatarFile) formData.append('avatar', avatarFile);
       if (bgFile) formData.append('background', bgFile);
 
       try {
@@ -137,8 +139,10 @@ const Admin = {
       formData.append('slug', document.getElementById('edit-comm-slug').value);
       formData.append('description', document.getElementById('edit-comm-desc').value);
       const iconFile = document.getElementById('edit-comm-icon').files[0];
+      const avatarFile = document.getElementById('edit-comm-avatar').files[0];
       const bgFile = document.getElementById('edit-comm-bg').files[0];
       if (iconFile) formData.append('icon', iconFile);
+      if (avatarFile) formData.append('avatar', avatarFile);
       if (bgFile) formData.append('background', bgFile);
 
       try {

@@ -12,12 +12,14 @@ const upload = multer({
         cb(null, path.join(__dirname, '../../frontend/assets/backgrounds/communities'));
       } else if (file.fieldname === 'photos') {
         cb(null, path.join(__dirname, '../../frontend/assets/photos'));
+      } else if (file.fieldname === 'avatar') {
+        cb(null, path.join(__dirname, '../../frontend/assets/avatars'));
       } else {
         cb(null, path.join(__dirname, '../../frontend/assets/icons/feed'));
       }
     },
     filename: (req, file, cb) => {
-      if (file.fieldname === 'background' || file.fieldname === 'photos') {
+      if (file.fieldname === 'background' || file.fieldname === 'photos' || file.fieldname === 'avatar') {
         cb(null, Date.now() + '-' + file.originalname);
       } else {
         cb(null, file.originalname);
@@ -54,10 +56,7 @@ router.get('/:slug/news', (req, res) => {
     const community = store.findOne('communities', c => c.slug === req.params.slug);
     if (!community) return res.status(404).json({ error: 'Сообщество не найдено' });
 
-    let posts = store.find('posts', p =>
-      p.community_id === community.id &&
-      (p.visibility === 'community' || p.visibility === 'both' || (!p.visibility && p.is_feed !== true) || (!p.visibility && p.is_feed === undefined))
-    );
+    let posts = store.find('posts', p => p.community_id === community.id);
     posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     const enriched = posts.map(p => {
@@ -67,6 +66,7 @@ router.get('/:slug/news', (req, res) => {
         author_name: author.name || 'Unknown',
         author_avatar: author.avatar || 'Admin.png',
         author_role: author.role || 'student',
+        community_icon: community.avatar || community.icon || null,
         likes_count: store.count('likes', l => l.post_id === p.id),
         comments_count: store.count('comments', c => c.post_id === p.id)
       };
@@ -94,14 +94,16 @@ router.get('/:slug/gallery', (req, res) => {
 // Create community (admin only)
 router.post('/', verifyToken, requireAdmin, upload.fields([
   { name: 'icon', maxCount: 1 },
-  { name: 'background', maxCount: 1 }
+  { name: 'background', maxCount: 1 },
+  { name: 'avatar', maxCount: 1 }
 ]), (req, res) => {
   try {
     const { title } = req.body;
     const slug = (req.body.slug || '').replace(/^\/+/, '').replace(/\/+/g, '-');
     const icon = req.files?.icon?.[0]?.filename || null;
     const background = req.files?.background?.[0]?.filename || null;
-    const community = store.insert('communities', { title, slug, background, icon, feed_icon: icon });
+    const avatar = req.files?.avatar?.[0]?.filename || null;
+    const community = store.insert('communities', { title, slug, background, icon, feed_icon: icon, avatar });
     res.json(community);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -143,7 +145,8 @@ router.delete('/:slug/gallery/:photoId', verifyToken, requireAdmin, (req, res) =
 // Update community (admin only)
 router.put('/:id', verifyToken, requireAdmin, upload.fields([
   { name: 'icon', maxCount: 1 },
-  { name: 'background', maxCount: 1 }
+  { name: 'background', maxCount: 1 },
+  { name: 'avatar', maxCount: 1 }
 ]), (req, res) => {
   try {
     const { title, slug, description } = req.body;
@@ -157,6 +160,9 @@ router.put('/:id', verifyToken, requireAdmin, upload.fields([
     }
     if (req.files?.background?.[0]) {
       updates.background = req.files.background[0].filename;
+    }
+    if (req.files?.avatar?.[0]) {
+      updates.avatar = req.files.avatar[0].filename;
     }
     const community = store.update('communities', req.params.id, updates);
     res.json(community);

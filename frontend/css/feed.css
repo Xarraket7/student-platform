@@ -235,11 +235,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 4px 16px;
+  gap: 12px;
+  padding: 10px 24px;
   margin-top: auto;
   transition: var(--transition);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
   flex-shrink: 0;
   border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
@@ -256,9 +256,9 @@
   flex: 1;
 }
 .publish-tab {
-  padding: 5px 16px;
+  padding: 8px 22px;
   border-radius: var(--radius-xl);
-  font-size: 12px;
+  font-size: 13px;
   font-family: var(--font-small);
   color: var(--text-secondary);
   cursor: pointer;
@@ -276,8 +276,8 @@
   border-color: rgba(255, 255, 255, 0.6);
 }
 .publish-add-btn {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--bg-glass);
   border: 1px solid var(--border-color);

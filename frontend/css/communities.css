@@ -274,6 +274,25 @@ body.community-inner-active .main-content {
   object-fit: cover;
   border-radius: var(--radius-md);
 }
+.news-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.news-card-actions .post-action {
+  font-size: 13px;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+.news-card-actions .post-action img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+}
 
 /* Bottom row - featured banner + welcome side by side */
 .community-bottom-row {
@@ -283,7 +302,59 @@ body.community-inner-active .main-content {
   flex-shrink: 0;
 }
 
+/* Featured carousel */
+.featured-carousel {
+  flex: 1.8;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.featured-slides {
+  width: 100%;
+  height: 100%;
+}
+.featured-slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.featured-slide.active {
+  display: block;
+}
+.featured-carousel-nav {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  display: flex;
+  gap: 4px;
+}
+.featured-carousel-nav .carousel-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.featured-carousel-nav .carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* Featured post banner - like feed post banners */
+.featured-carousel .community-featured-post,
+.featured-slide .community-featured-post {
+  flex: none;
+  width: 100%;
+  height: 100%;
+}
 .community-featured-post {
   flex: 1.8;
   border-radius: var(--radius-lg);

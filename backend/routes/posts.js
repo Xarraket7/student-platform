@@ -60,7 +60,7 @@ router.get('/feed', (req, res) => {
         author_role: author.role || 'student',
         community_title: community?.title || null,
         community_slug: community?.slug || null,
-        community_icon: community?.icon || null,
+        community_icon: community?.avatar || community?.icon || null,
         likes_count, comments_count
       };
     });

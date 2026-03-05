@@ -109,53 +109,86 @@ const Communities = {
         return;
       }
 
-      // Find featured post (one with image) and grid posts (without image or all)
-      const postsWithImage = news.filter(p => p.image);
-      const postsWithoutImage = news.filter(p => !p.image);
-      const featuredPost = postsWithImage[0] || news[0];
-      const gridPosts = postsWithoutImage.length > 0 ? postsWithoutImage.slice(0, 3) : news.slice(1, 4);
+      // Separate posts: those with banner images for carousel, rest for grid
+      const getPostImage = (p) => {
+        if (p.image) return p.image.startsWith('Rectangle') ? 'assets/backgrounds/banners/' + p.image : '/uploads/' + p.image;
+        return '';
+      };
+      const featuredPosts = news.filter(p => p.image);
+      const gridPosts = news.filter(p => !p.image).slice(0, 3);
+      if (gridPosts.length === 0 && news.length > 1) {
+        gridPosts.push(...news.filter(p => !featuredPosts.includes(p)).slice(0, 3));
+      }
 
-      // Grid news cards - title + description + optional photo
-      const newsHTML = gridPosts.map(post => `
-        <div class="news-card">
-          <div class="news-card-title">${post.title || post.content.substring(0, 40)}</div>
-          <div class="news-card-content">${post.content}</div>
-          ${post.news_image ? `<div class="news-card-image"><img src="assets/photos/${post.news_image}" alt=""></div>` : ''}
-        </div>
-      `).join('');
+      // Grid news cards with optional news_image, likes and comments
+      const newsHTML = gridPosts.map(post => {
+        const cardImage = post.news_image ? `assets/photos/${post.news_image}` : '';
+        return `
+          <div class="news-card">
+            <div class="news-card-title">${post.title || post.content.substring(0, 40)}</div>
+            <div class="news-card-content">${post.content}</div>
+            ${cardImage ? `<div class="news-card-image"><img src="${cardImage}" alt=""></div>` : ''}
+            <div class="news-card-actions">
+              <div class="post-action like-btn" data-post-id="${post.id}">
+                <img src="assets/icons/nav/Лайк 1.png" alt="">
+                <span class="like-count">${post.likes_count || 0}</span>
+              </div>
+              <div class="post-action comment-btn" data-post-id="${post.id}">
+                <img src="assets/icons/nav/Комм.png" alt="">
+                <span>${post.comments_count || 0}</span>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
 
-      // Featured post banner - image as background like feed posts
-      const featuredImage = featuredPost.image
-        ? (featuredPost.image.startsWith('Rectangle') ? 'assets/backgrounds/banners/' + featuredPost.image : '/uploads/' + featuredPost.image)
-        : '';
-
-      const featuredHTML = `
-        <div class="community-featured-post" style="${featuredImage ? `background-image: url('${featuredImage}')` : ''}">
-          <div class="featured-post-overlay">
-            <div>
-              <div class="featured-post-header">
-                <img src="assets/avatars/${featuredPost.author_avatar || this.current.icon?.replace('.png', '') + '.png' || 'Admin.png'}" alt="" class="featured-post-avatar">
+      // Featured posts carousel (multiple banners with navigation)
+      const communityAvatar = this.current.avatar || this.current.icon || 'Admin.png';
+      const avatarPath = 'assets/avatars/' + communityAvatar;
+      let featuredHTML = '';
+      if (featuredPosts.length > 0) {
+        const slides = featuredPosts.map((post, i) => `
+          <div class="featured-slide ${i === 0 ? 'active' : ''}" data-index="${i}">
+            <div class="community-featured-post" style="background-image: url('${getPostImage(post)}')">
+              <div class="featured-post-overlay">
                 <div>
-                  <div class="featured-post-author">${this.current.title}</div>
-                  <div class="featured-post-role">${featuredPost.author_role || 'Админ'}</div>
+                  <div class="featured-post-header">
+                    <img src="${avatarPath}" alt="" class="featured-post-avatar">
+                    <div>
+                      <div class="featured-post-author">${this.current.title}</div>
+                      <div class="featured-post-role">${post.author_role || 'Админ'}</div>
+                    </div>
+                  </div>
+                  <div class="featured-post-text">${post.content}</div>
+                </div>
+                <div class="featured-post-actions">
+                  <div class="post-action like-btn" data-post-id="${post.id}">
+                    <img src="assets/icons/nav/Лайк 1.png" alt="">
+                    <span class="like-count">${post.likes_count || 0}</span>
+                  </div>
+                  <div class="post-action comment-btn" data-post-id="${post.id}">
+                    <img src="assets/icons/nav/Комм.png" alt="">
+                    <span>${post.comments_count || 0}</span>
+                  </div>
                 </div>
               </div>
-              <div class="featured-post-text">${featuredPost.content}</div>
             </div>
-            <div class="featured-post-actions">
-              <div class="post-action like-btn" data-post-id="${featuredPost.id}">
-                <img src="assets/icons/nav/Лайк 1.png" alt="">
-                <span class="like-count">${featuredPost.likes_count || 0}</span>
-              </div>
-              <div class="post-action comment-btn" data-post-id="${featuredPost.id}">
-                <img src="assets/icons/nav/Комм.png" alt="">
-                <span>${featuredPost.comments_count || 0}</span>
-              </div>
-            </div>
+          </div>`).join('');
+
+        const navHTML = featuredPosts.length > 1 ? `
+          <div class="featured-carousel-nav">
+            <button class="carousel-btn featured-prev">‹</button>
+            <button class="carousel-btn featured-next">›</button>
+          </div>` : '';
+
+        featuredHTML = `<div class="featured-carousel">${navHTML}<div class="featured-slides">${slides}</div></div>`;
+      } else {
+        featuredHTML = `<div class="community-featured-post news-card-empty">
+          <div class="featured-post-overlay" style="justify-content:center;align-items:center;">
+            <div class="news-empty-message">Скоро здесь появятся баннеры</div>
           </div>
         </div>`;
+      }
 
-      // Welcome text - plain, NO panel background
       const welcomeHTML = `
         <div class="community-welcome">
           <h2>Добро пожаловать!</h2>
@@ -165,6 +198,19 @@ const Communities = {
       container.innerHTML = `
         <div class="news-grid">${newsHTML}</div>
         <div class="community-bottom-row">${featuredHTML}${welcomeHTML}</div>`;
+
+      // Carousel logic
+      if (featuredPosts.length > 1) {
+        let currentSlide = 0;
+        const slides = container.querySelectorAll('.featured-slide');
+        const showSlide = (idx) => {
+          slides.forEach(s => s.classList.remove('active'));
+          currentSlide = (idx + slides.length) % slides.length;
+          slides[currentSlide].classList.add('active');
+        };
+        container.querySelector('.featured-prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
+        container.querySelector('.featured-next')?.addEventListener('click', () => showSlide(currentSlide + 1));
+      }
 
       container.querySelectorAll('.like-btn').forEach(btn => {
         btn.addEventListener('click', () => Feed.toggleLike(btn));
