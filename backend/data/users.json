@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "Администратор",
+    "email": "admin@college.kz",
+    "password": "$2a$10$XQxBj1N8C8VqWmqK8VrGxeH7C3F.VF5fG8W1eXBQ.XL7jVKPmKBXi",
+    "avatar": "Admin.png",
+    "role": "admin",
+    "age": null,
+    "birthday": null,
+    "group_name": null,
+    "google_id": null,
+    "is_online": true,
+    "friends": [],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Said Amankeldin",
+    "email": "said@college.kz",
+    "password": null,
+    "avatar": "1772398247865-avatar.png",
+    "role": "student",
+    "age": 19,
+    "birthday": "2006-05-12",
+    "group_name": "ИС22-4Б",
+    "google_id": null,
+    "is_online": true,
+    "friends": [
+      3,
+      4,
+      6,
+      7
+    ],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Almaz Botkoldin",
+    "email": "almaz@college.kz",
+    "password": null,
+    "avatar": "Botkoldin Almaz.png",
+    "role": "student",
+    "age": 19,
+    "birthday": "2006-08-23",
+    "group_name": "SE-2201",
+    "google_id": null,
+    "is_online": true,
+    "friends": [
+      6,
+      2
+    ],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Tair Nariman",
+    "email": "tair@college.kz",
+    "password": null,
+    "avatar": "Tair Nariman.png",
+    "role": "student",
+    "age": 20,
+    "birthday": "2005-11-04",
+    "group_name": "SE-2202",
+    "google_id": null,
+    "is_online": true,
+    "friends": [
+      2
+    ],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Alina",
+    "email": "alina@college.kz",
+    "password": null,
+    "avatar": "Alina.png",
+    "role": "student",
+    "age": 19,
+    "birthday": "2006-03-15",
+    "group_name": "SE-2203",
+    "google_id": null,
+    "is_online": true,
+    "friends": [],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "name": "Malik Taskenbaev",
+    "email": "malik@college.kz",
+    "password": null,
+    "avatar": "Malik Taskenbaev.png",
+    "role": "student",
+    "age": 19,
+    "birthday": "2006-07-20",
+    "group_name": "SE-2201",
+    "google_id": null,
+    "is_online": true,
+    "friends": [
+      3,
+      2
+    ],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "name": "Eldar Muhtarof",
+    "email": "eldar@college.kz",
+    "password": null,
+    "avatar": "Eldar Muhtarof.png",
+    "role": "teacher",
+    "age": 35,
+    "birthday": "1990-09-10",
+    "group_name": null,
+    "google_id": null,
+    "is_online": true,
+    "friends": [
+      2
+    ],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "name": "Talgat Janjazin",
+    "email": "talgat@college.kz",
+    "password": null,
+    "avatar": "Talgat Janjazin.png",
+    "role": "student",
+    "age": 20,
+    "birthday": "2005-12-01",
+    "group_name": "SE-2204",
+    "google_id": null,
+    "is_online": true,
+    "friends": [],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "name": "Арман",
+    "email": "arman@college.kz",
+    "password": null,
+    "avatar": "Арман.png",
+    "role": "student",
+    "age": 19,
+    "birthday": "2006-01-30",
+    "group_name": "SE-2201",
+    "google_id": null,
+    "is_online": false,
+    "friends": [],
+    "created_at": "2026-01-01T00:00:00.000Z"
+  }
+]

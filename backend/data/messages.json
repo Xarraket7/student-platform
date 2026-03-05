@@ -1,0 +1,784 @@
+[
+  {
+    "id": 1,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Привет всем! Кто готов к дебатам на следующей неделе?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "sender_id": 5,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Я готова! Тема про ИИ в образовании очень интересная 🔥",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:05:00.000Z"
+  },
+  {
+    "id": 3,
+    "sender_id": 3,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Нужно подготовить аргументы за и против, кто какую сторону берёт?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:10:00.000Z"
+  },
+  {
+    "id": 4,
+    "sender_id": 4,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Я за сторону «за», у меня есть хорошие примеры из практики",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:15:00.000Z"
+  },
+  {
+    "id": 5,
+    "sender_id": 7,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Отлично, ребята! Не забудьте — дебаты в среду в 15:00, аудитория 301",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:20:00.000Z"
+  },
+  {
+    "id": 6,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 1,
+    "text": "Принято! Буду 👍",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T09:25:00.000Z"
+  },
+  {
+    "id": 7,
+    "sender_id": 3,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Ребята, кто идёт в поход на выходных?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Я иду! Уже рюкзак собрал 🎒",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:05:00.000Z"
+  },
+  {
+    "id": 9,
+    "sender_id": 6,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "А палатки нужно свои брать или будут общие?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:10:00.000Z"
+  },
+  {
+    "id": 10,
+    "sender_id": 1,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Палатки предоставляем, берите только спальники и личные вещи",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:15:00.000Z"
+  },
+  {
+    "id": 11,
+    "sender_id": 5,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Супер! А во сколько сбор?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:20:00.000Z"
+  },
+  {
+    "id": 12,
+    "sender_id": 1,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Сбор в субботу в 8:00 у главного входа колледжа. Не опаздывайте!",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:25:00.000Z"
+  },
+  {
+    "id": 13,
+    "sender_id": 8,
+    "receiver_id": null,
+    "community_id": 2,
+    "text": "Отлично, я тоже записался! 🏔️",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T10:30:00.000Z"
+  },
+  {
+    "id": 14,
+    "sender_id": 4,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "Кто-нибудь разобрался с подключением Arduino к датчику температуры?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:00:00.000Z"
+  },
+  {
+    "id": 15,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "Да, я делал на прошлой неделе. Нужен резистор 4.7кОм для DS18B20",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:05:00.000Z"
+  },
+  {
+    "id": 16,
+    "sender_id": 3,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "У меня есть схема подключения, скину после пары",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:10:00.000Z"
+  },
+  {
+    "id": 17,
+    "sender_id": 7,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "Молодцы! На следующем занятии будем собирать робота, готовьте компоненты",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:15:00.000Z"
+  },
+  {
+    "id": 18,
+    "sender_id": 9,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "А можно использовать Raspberry Pi вместо Arduino?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:20:00.000Z"
+  },
+  {
+    "id": 19,
+    "sender_id": 7,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "Можно, но для начала лучше Arduino — проще для новичков 👨‍🔬",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T11:25:00.000Z"
+  },
+  {
+    "id": 20,
+    "sender_id": 5,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "Смотрите какой закат я сняла вчера! 📸",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:00:00.000Z"
+  },
+  {
+    "id": 21,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "Вау, красиво! На какой телефон снимала?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:05:00.000Z"
+  },
+  {
+    "id": 22,
+    "sender_id": 5,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "iPhone 15 Pro, ночной режим + HDR",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:10:00.000Z"
+  },
+  {
+    "id": 23,
+    "sender_id": 6,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "Кто идёт на фотопрогулку в субботу? Пойдем в парк",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:15:00.000Z"
+  },
+  {
+    "id": 24,
+    "sender_id": 8,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "Я пойду! Хочу потренировать уличную съёмку",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:20:00.000Z"
+  },
+  {
+    "id": 25,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 4,
+    "text": "Тоже буду! Возьму штатив для длинной выдержки 🌇",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T12:25:00.000Z"
+  },
+  {
+    "id": 26,
+    "sender_id": 1,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Напоминаю: завтра акция по уборке территории колледжа! Сбор в 9:00",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:00:00.000Z"
+  },
+  {
+    "id": 27,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Буду! А перчатки нужно свои нести?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:05:00.000Z"
+  },
+  {
+    "id": 28,
+    "sender_id": 1,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Нет, всё выдадим на месте — перчатки, мешки, грабли",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:10:00.000Z"
+  },
+  {
+    "id": 29,
+    "sender_id": 5,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "А после уборки будет чаепитие как в прошлый раз? 😊",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:15:00.000Z"
+  },
+  {
+    "id": 30,
+    "sender_id": 1,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Конечно! Пицца и чай за счёт колледжа 🍕",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:20:00.000Z"
+  },
+  {
+    "id": 31,
+    "sender_id": 9,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Отлично, тогда точно приду! Позову ещё ребят из группы",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:25:00.000Z"
+  },
+  {
+    "id": 32,
+    "sender_id": 3,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Я тоже буду, можно сертификат волонтёра получить?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T13:30:00.000Z"
+  },
+  {
+    "id": 33,
+    "sender_id": 4,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Парни, сегодня тренировка по футболу в 16:00, не забудьте!",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:00:00.000Z"
+  },
+  {
+    "id": 34,
+    "sender_id": 6,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Буду! Кто ещё идёт? Нужно минимум 10 человек для игры",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:05:00.000Z"
+  },
+  {
+    "id": 35,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Я иду, и Арман тоже сказал что придёт ⚽",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:10:00.000Z"
+  },
+  {
+    "id": 36,
+    "sender_id": 8,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Я тоже! А форму уже выдали новую?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:15:00.000Z"
+  },
+  {
+    "id": 37,
+    "sender_id": 4,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Да, форма в раздевалке. Красно-зелёная, как у сборной 😄",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:20:00.000Z"
+  },
+  {
+    "id": 38,
+    "sender_id": 3,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Кстати, турнир через 2 недели. Надо усилить тренировки!",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:25:00.000Z"
+  },
+  {
+    "id": 39,
+    "sender_id": 6,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "Согласен, предлагаю добавить ещё одну тренировку в понедельник 💪",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T14:30:00.000Z"
+  },
+  {
+    "id": 40,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 5,
+    "text": "Всем привет",
+    "image": null,
+    "is_read": false,
+    "created_at": "2026-02-23T01:43:29.001Z"
+  },
+  {
+    "id": 41,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "@админ добавь мое фото в галерею",
+    "image": null,
+    "is_read": false,
+    "created_at": "2026-02-23T01:50:15.391Z",
+    "sender_name": "Said Amankeldin",
+    "sender_avatar": "Said Amankeldin.png"
+  },
+  {
+    "id": 42,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 6,
+    "text": "image 6.png",
+    "image": "/uploads/1771811430984-image 6.png",
+    "is_read": false,
+    "created_at": "2026-02-23T01:50:31.003Z",
+    "sender_name": "Said Amankeldin",
+    "sender_avatar": "Said Amankeldin.png"
+  },
+  {
+    "id": 43,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ Microsoft Word.docx",
+    "image": "/uploads/1771811553325-ÐÐ¾ÐºÑÐ¼ÐµÐ½Ñ Microsoft Word.docx",
+    "is_read": false,
+    "created_at": "2026-02-23T01:52:33.331Z"
+  },
+  {
+    "id": 44,
+    "sender_id": 1,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Said, привет! Добро пожаловать на платформу. Если будут вопросы — пиши.",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-20T09:00:00.000Z"
+  },
+  {
+    "id": 45,
+    "sender_id": 2,
+    "receiver_id": 1,
+    "community_id": null,
+    "text": "Спасибо! Очень крутая платформа получилась 🔥",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-20T09:05:00.000Z"
+  },
+  {
+    "id": 46,
+    "sender_id": 1,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Рад что нравится! Не забудь вступить в сообщества и проверить расписание событий.",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-20T09:10:00.000Z"
+  },
+  {
+    "id": 47,
+    "sender_id": 2,
+    "receiver_id": 1,
+    "community_id": null,
+    "text": "Уже вступил в дебаты и спорт клуб, будет интересно!",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-20T09:15:00.000Z"
+  },
+  {
+    "id": 48,
+    "sender_id": 3,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Саид, привет! Ты сделал домашку по базам данных?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:00:00.000Z"
+  },
+  {
+    "id": 49,
+    "sender_id": 2,
+    "receiver_id": 3,
+    "community_id": null,
+    "text": "Привет! Да, почти закончил. Осталось только нормализацию доделать",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:05:00.000Z"
+  },
+  {
+    "id": 50,
+    "sender_id": 3,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Можешь объяснить 3NF? Я немного запутался в этом",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:10:00.000Z"
+  },
+  {
+    "id": 51,
+    "sender_id": 2,
+    "receiver_id": 3,
+    "community_id": null,
+    "text": "Конечно! 3NF — это когда все неключевые атрибуты зависят только от первичного ключа и ни от чего другого",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:15:00.000Z"
+  },
+  {
+    "id": 52,
+    "sender_id": 3,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Теперь понял! Спасибо, бро 🤝",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:20:00.000Z"
+  },
+  {
+    "id": 53,
+    "sender_id": 2,
+    "receiver_id": 3,
+    "community_id": null,
+    "text": "Всегда пожалуйста! Если что — пиши",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-21T14:25:00.000Z"
+  },
+  {
+    "id": 54,
+    "sender_id": 4,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Саид, завтра тренировка по футболу в 16:00. Придёшь?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T18:00:00.000Z"
+  },
+  {
+    "id": 55,
+    "sender_id": 2,
+    "receiver_id": 4,
+    "community_id": null,
+    "text": "Да, конечно! На какой позиции сегодня играем?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T18:05:00.000Z"
+  },
+  {
+    "id": 56,
+    "sender_id": 4,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Ты на полузащите, я в нападении. Команды делим на месте",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T18:10:00.000Z"
+  },
+  {
+    "id": 57,
+    "sender_id": 2,
+    "receiver_id": 4,
+    "community_id": null,
+    "text": "Окей, идёт! Через 2 недели турнир, надо быть в форме ⚽",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T18:15:00.000Z"
+  },
+  {
+    "id": 58,
+    "sender_id": 4,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "100%! В этот раз точно выиграем 💪",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-22T18:20:00.000Z"
+  },
+  {
+    "id": 59,
+    "sender_id": 5,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Привет! Ты уже начал делать дипломный проект?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:00:00.000Z"
+  },
+  {
+    "id": 60,
+    "sender_id": 2,
+    "receiver_id": 5,
+    "community_id": null,
+    "text": "Привет Алина! Да, делаю веб-платформу для студенческих сообществ",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:05:00.000Z"
+  },
+  {
+    "id": 61,
+    "sender_id": 5,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "О, звучит круто! На чём пишешь?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:10:00.000Z"
+  },
+  {
+    "id": 62,
+    "sender_id": 2,
+    "receiver_id": 5,
+    "community_id": null,
+    "text": "HTML, CSS, JavaScript + Node.js на бэкенде. Дизайн в стиле glassmorphism 🎨",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:15:00.000Z"
+  },
+  {
+    "id": 63,
+    "sender_id": 5,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Вау, я тоже хочу такой! Покажешь когда закончишь?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:20:00.000Z"
+  },
+  {
+    "id": 64,
+    "sender_id": 2,
+    "receiver_id": 5,
+    "community_id": null,
+    "text": "Конечно покажу! Ещё чуть-чуть осталось доделать",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T10:25:00.000Z"
+  },
+  {
+    "id": 65,
+    "sender_id": 6,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Саид, пойдёшь на выходных в кино?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:00:00.000Z"
+  },
+  {
+    "id": 66,
+    "sender_id": 2,
+    "receiver_id": 6,
+    "community_id": null,
+    "text": "О, а что идёт?",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:05:00.000Z"
+  },
+  {
+    "id": 67,
+    "sender_id": 6,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Новый Marvel вышел, все говорят что огонь 🎬",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:10:00.000Z"
+  },
+  {
+    "id": 68,
+    "sender_id": 2,
+    "receiver_id": 6,
+    "community_id": null,
+    "text": "Идёт! На какой сеанс? Давай на 18:00",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:15:00.000Z"
+  },
+  {
+    "id": 69,
+    "sender_id": 6,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "18:00 отлично! Тогда встречаемся у входа в 17:45",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:20:00.000Z"
+  },
+  {
+    "id": 70,
+    "sender_id": 2,
+    "receiver_id": 6,
+    "community_id": null,
+    "text": "Договорились! 🍿",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-02-23T16:25:00.000Z"
+  },
+  {
+    "id": 71,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 3,
+    "text": "Ð¿Ð¼7.txt",
+    "image": "/uploads/1771915089411-Ð¿Ð¼7.txt",
+    "is_read": false,
+    "created_at": "2026-02-24T06:38:09.428Z"
+  },
+  {
+    "id": 73,
+    "sender_id": 2,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "Привет",
+    "image": null,
+    "is_read": false,
+    "created_at": "2026-03-01T14:05:21.002Z",
+    "sender_name": "Said Amankeldin",
+    "sender_avatar": "Said Amankeldin.png"
+  },
+  {
+    "id": 74,
+    "sender_id": 2,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "п",
+    "image": null,
+    "is_read": false,
+    "created_at": "2026-03-01T14:05:25.310Z",
+    "sender_name": "Said Amankeldin",
+    "sender_avatar": "Said Amankeldin.png"
+  },
+  {
+    "id": 75,
+    "sender_id": 2,
+    "receiver_id": 7,
+    "community_id": null,
+    "text": "приапа",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-03-01T14:08:20.748Z",
+    "sender_name": "Said Amankeldin",
+    "sender_avatar": "Said Amankeldin.png"
+  },
+  {
+    "id": 76,
+    "sender_id": 7,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "привет",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-03-01T15:06:26.796Z",
+    "sender_name": "Eldar Muhtarof",
+    "sender_avatar": "Eldar Muhtarof.png"
+  },
+  {
+    "id": 77,
+    "sender_id": 1,
+    "receiver_id": 2,
+    "community_id": null,
+    "text": "привет",
+    "image": null,
+    "is_read": true,
+    "created_at": "2026-03-02T13:45:40.467Z"
+  },
+  {
+    "id": 78,
+    "sender_id": 2,
+    "receiver_id": null,
+    "community_id": 11,
+    "text": "image (1).png",
+    "image": "/uploads/1772734147907-image (1).png",
+    "is_read": false,
+    "created_at": "2026-03-05T18:09:07.922Z"
+  }
+]

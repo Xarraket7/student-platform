@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Community Platform</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/feed.css">
+  <link rel="stylesheet" href="css/communities.css">
+  <link rel="stylesheet" href="css/events.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/announcements.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+</head>
+<body>
+  <!-- Auth Pages (shown when on login/register route) -->
+  <div id="auth-page" class="auth-page" style="display:none">
+    <div class="auth-bg-slider">
+      <div class="auth-bg auth-bg-1 active"></div>
+      <div class="auth-bg auth-bg-2"></div>
+    </div>
+    <div class="auth-container">
+      <!-- Login Form -->
+      <div id="login-form" class="auth-form glass-panel">
+        <h1 class="auth-title">Вход</h1>
+        <div class="auth-input-group">
+          <input type="email" id="login-email" placeholder="Email" class="auth-input">
+          <input type="password" id="login-password" placeholder="Пароль" class="auth-input">
+        </div>
+        <button id="login-btn" class="auth-btn primary-btn">Войти</button>
+        <div class="auth-divider"><span>или</span></div>
+        <button id="google-login-btn" class="auth-btn google-btn">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+          Войти через Google
+        </button>
+        <div class="auth-divider"><span>быстрый вход</span></div>
+        <div class="quick-login-buttons">
+          <button class="quick-login-btn" data-role="admin">Войти как Админ</button>
+          <button class="quick-login-btn" data-role="teacher">Войти как Преподаватель</button>
+          <button class="quick-login-btn" data-role="student">Войти как Студент</button>
+          <button class="quick-login-btn" data-role="guest">Войти как Гость</button>
+        </div>
+        <p class="auth-switch">Нет аккаунта? <a href="#" id="show-register">Регистрация</a></p>
+      </div>
+      <!-- Register Form -->
+      <div id="register-form" class="auth-form glass-panel" style="display:none">
+        <h1 class="auth-title">Регистрация</h1>
+        <div class="auth-input-group">
+          <input type="text" id="reg-name" placeholder="Имя" class="auth-input">
+          <input type="email" id="reg-email" placeholder="Email" class="auth-input">
+          <input type="password" id="reg-password" placeholder="Пароль" class="auth-input">
+        </div>
+        <button id="register-btn" class="auth-btn primary-btn">Зарегистрироваться</button>
+        <div class="auth-divider"><span>или</span></div>
+        <button class="auth-btn google-btn">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+          Регистрация через Google
+        </button>
+        <p class="auth-switch">Уже есть аккаунт? <a href="#" id="show-login">Вход</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="app-container" style="display:none">
+    <!-- Background -->
+    <div id="app-background" class="app-background"></div>
+
+    <!-- Main Panel (Панель на главной) -->
+    <div class="main-panel">
+      <!-- Top Navigation (Навигационная панель) -->
+      <nav class="top-nav glass-panel">
+        <div class="nav-left">
+          <div class="search-bar">
+            <img src="assets/icons/nav/Поиск.png" alt="Search" class="nav-icon-img">
+            <input type="text" placeholder="Поиск..." class="search-input">
+          </div>
+        </div>
+        <div class="nav-center">
+          <div class="nav-tabs-wrapper">
+            <div class="nav-tabs">
+              <button class="nav-tab active" data-page="feed">
+                <span>Лента</span>
+              </button>
+              <button class="nav-tab" data-page="communities">
+                <span>Сообщества</span>
+              </button>
+              <button class="nav-tab" data-page="events">
+                <span>События</span>
+              </button>
+              <button class="nav-tab" data-page="chat">
+                <span>Чат</span>
+              </button>
+              <button class="nav-tab" data-page="announcements">
+                <span>объявления</span>
+              </button>
+            </div>
+            <button id="notifications-btn" class="icon-btn notification-btn nav-bell">
+              <img src="assets/icons/nav/Уведомление 1.png" alt="Notifications" class="nav-icon-img">
+              <span class="notification-dot" style="display:none"></span>
+            </button>
+          </div>
+        </div>
+        <div class="nav-right">
+          <button id="theme-toggle" class="icon-btn" style="display:none">
+            <img src="assets/icons/nav/Тема.png" alt="Theme" class="nav-icon-img">
+          </button>
+          <div id="profile-mini" class="profile-mini" data-page="profile">
+            <img id="user-avatar-mini" src="assets/avatars/Admin.png" alt="Profile" class="avatar-mini">
+            <div class="profile-info-mini">
+              <span id="user-name-mini" class="user-name-mini">Гость</span>
+              <span id="user-role-mini" class="user-role-mini">студент</span>
+            </div>
+            <span class="profile-dropdown-arrow">&#9662;</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Notifications Dropdown -->
+      <div id="notifications-dropdown" class="notifications-dropdown" style="display:none">
+        <div class="notifications-header">Уведомления</div>
+        <div class="notifications-list"></div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Left Sidebar (Панель слева) -->
+        <aside class="left-sidebar glass-panel">
+          <nav class="sidebar-nav">
+            <a class="sidebar-link active" data-page="feed">
+              <img src="assets/icons/nav/Лента, Галерея.png" alt="" class="sidebar-icon">
+              <span>Лента</span>
+            </a>
+            <a class="sidebar-link" data-page="communities">
+              <img src="assets/icons/nav/Сообщества.png" alt="" class="sidebar-icon">
+              <span>Сообщества</span>
+            </a>
+            <a class="sidebar-link" data-page="events">
+              <img src="assets/icons/nav/События, Новости.png" alt="" class="sidebar-icon">
+              <span>События</span>
+            </a>
+            <a class="sidebar-link" data-page="chat">
+              <img src="assets/icons/nav/Чат, Общий чат.png" alt="" class="sidebar-icon">
+              <span>Чат</span>
+            </a>
+            <a class="sidebar-link" data-page="announcements">
+              <img src="assets/icons/nav/Объявления.png" alt="" class="sidebar-icon">
+              <span>Объявления</span>
+            </a>
+          </nav>
+          <div class="sidebar-bottom">
+            <button id="admin-panel-btn" class="sidebar-link" style="display:none" data-page="admin">
+              <img src="assets/icons/nav/Опубликовать.png" alt="" class="sidebar-icon">
+              <span>Админ</span>
+            </button>
+            <button id="logout-btn" class="sidebar-link">
+              <img src="assets/icons/nav/Выйти I Войти.png" alt="" class="sidebar-icon">
+              <span id="auth-action-text">Войти</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <!-- FEED PAGE -->
+          <section id="page-feed" class="page active">
+            <div class="feed-layout">
+              <div class="feed-center">
+                <!-- Community icons row -->
+                <div class="feed-communities-row">
+                  <div class="feed-community-icons" id="feed-community-icons"></div>
+                </div>
+                <!-- Posts Carousel -->
+                <div class="feed-posts-section">
+                  <div class="feed-posts-header">
+                    <h3 class="feed-posts-title">вам может понравиться</h3>
+                    <div class="feed-posts-nav">
+                      <button class="carousel-btn carousel-prev" id="posts-prev">‹</button>
+                      <button class="carousel-btn carousel-next" id="posts-next">›</button>
+                    </div>
+                  </div>
+                  <div class="feed-posts-carousel" id="feed-posts"></div>
+                </div>
+              </div>
+              <div class="feed-right">
+                <div class="right-events glass-panel">
+                  <h3>Ближайшие события</h3>
+                  <div id="feed-events-list" class="events-list-mini"></div>
+                </div>
+                <div class="right-announcements glass-panel">
+                  <h3>Объявления</h3>
+                  <div id="feed-announcements-list" class="announcements-list-mini"></div>
+                </div>
+                <div class="right-friends glass-panel">
+                  <div class="friends-header">
+                    <h3>Друзья онлайн</h3>
+                    <span class="friends-arrow">›</span>
+                  </div>
+                  <div class="friends-avatars" id="feed-friends-online"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Publish bar (admin visible) -->
+            <div class="publish-bar glass-panel" id="publish-bar">
+              <img src="assets/icons/nav/Опубликовать.png" alt="" class="publish-icon">
+              <div class="publish-tabs">
+                <span class="publish-tab active">Опубликовать</span>
+                <span class="publish-tab">Объявление</span>
+                <span class="publish-tab">Событие</span>
+              </div>
+              <button class="publish-add-btn">+</button>
+            </div>
+          </section>
+
+          <!-- COMMUNITIES PAGE -->
+          <section id="page-communities" class="page">
+            <div class="section-header glass-panel">
+              <h1>College Communities</h1>
+              <p>Тут находятся все клубы и сообщества колледжа — вместо бесконечных Instagram-аккаунтов или рассылок по группам, где вся важная информация собрана в одном месте. Здесь ты всегда будешь в курсе мероприятий, встреч, наборов в клубы и всего, чем живёт колледж. Удобно, понятно и актуально. Присоединяйся к нам, чтобы быть в курсе всей студенческой жизни и ничего не пропускать.</p>
+            </div>
+            <div class="communities-grid" id="communities-grid"></div>
+            <!-- Guest warning -->
+            <div id="communities-guest-warning" class="guest-warning" style="display:none">
+              <div class="guest-warning-content">
+                <img src="assets/elements/JB.png" alt="" class="guest-warning-img">
+                <div class="guest-overlay">
+                  <p>Пожалуйста войдите в систему чтобы пользоваться полными функциями платформы</p>
+                  <button class="guest-login-btn">Войти</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- COMMUNITY INNER PAGE -->
+          <section id="page-community-inner" class="page">
+            <div class="community-header">
+              <h1 id="community-title"></h1>
+            </div>
+            <div class="community-layout">
+              <div class="community-sidebar">
+                <nav class="community-nav">
+                  <a class="community-tab active" data-tab="news">
+                    <img src="assets/icons/nav/События, Новости.png" alt="" class="community-tab-icon">
+                    <span>Новости</span>
+                  </a>
+                  <a class="community-tab" data-tab="chat">
+                    <img src="assets/icons/nav/Чат, Общий чат.png" alt="" class="community-tab-icon">
+                    <span>Общий чат</span>
+                  </a>
+                  <a class="community-tab" data-tab="gallery">
+                    <img src="assets/icons/nav/Лента, Галерея.png" alt="" class="community-tab-icon">
+                    <span>Галерея</span>
+                  </a>
+                </nav>
+                <div class="community-sidebar-bottom">
+                  <button class="community-back-btn" id="community-back-btn">
+                    <img src="assets/icons/nav/Выйти I Войти.png" alt="" class="community-tab-icon">
+                    <span>Выйти</span>
+                  </button>
+                </div>
+              </div>
+              <div class="community-content">
+                <div id="community-news" class="community-section active"></div>
+                <div id="community-chat" class="community-section" style="display:none">
+                  <div class="community-chat-area">
+                    <div class="chat-messages" id="community-chat-messages"></div>
+                    <div class="chat-file-preview" id="community-file-preview" style="display:none"></div>
+                    <div class="chat-input-bar">
+                      <button class="icon-btn chat-photo-btn" id="community-photo-btn">
+                        <img src="assets/icons/nav/Фото.png" alt="" class="nav-icon-img">
+                      </button>
+                      <input type="file" id="community-file-input" multiple accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar" style="display:none">
+                      <input type="text" id="community-chat-input" placeholder="Написать сообщение..." class="chat-input">
+                      <button id="community-chat-send" class="send-btn">
+                        <img src="assets/icons/nav/Опубликовать.png" alt="" class="nav-icon-img">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div id="community-gallery" class="community-section" style="display:none"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- EVENTS PAGE -->
+          <section id="page-events" class="page">
+            <div class="section-header glass-panel">
+              <h1>College Events</h1>
+              <p>Тут находится информация обо всех актуальных событиях колледжа, включая объявления, важные сообщения от кураторов и администрации, а также анонсы мероприятий. В данном разделе также размещается расписание занятий, экзаменов и других учебных активностей, что позволяет студентам удобно получать всю необходимую информацию в одном месте и всегда быть в курсе жизни колледжа.</p>
+            </div>
+            <div id="events-guest-warning" class="guest-warning" style="display:none">
+              <div class="guest-warning-content">
+                <img src="assets/elements/JB.png" alt="" class="guest-warning-img">
+                <div class="guest-overlay">
+                  <p>Пожалуйста войдите в систему чтобы пользоваться полными функциями платформы</p>
+                  <button class="guest-login-btn">Войти</button>
+                </div>
+              </div>
+            </div>
+            <div class="events-grid" id="events-grid"></div>
+          </section>
+
+          <!-- CHAT PAGE -->
+          <section id="page-chat" class="page">
+            <div class="section-header glass-panel">
+              <h1>Personal chats</h1>
+              <p>Тут находится функционал для общения, где вы можете переписываться с друзьями и одногруппниками в чатах. В этом разделе также можно напрямую обратиться к администратору для решения любых вопросов. Всё общение по колледжу собрано здесь: от простого дружеского чата до официальных запросов, чтобы вы могли быстро получать нужную помощь и всегда быть на связи.</p>
+            </div>
+            <div id="chat-guest-warning" class="guest-warning" style="display:none">
+              <div class="guest-warning-content">
+                <img src="assets/elements/JB.png" alt="" class="guest-warning-img">
+                <div class="guest-overlay">
+                  <p>Пожалуйста войдите в систему чтобы пользоваться полными функциями платформы</p>
+                  <button class="guest-login-btn">Войти</button>
+                </div>
+              </div>
+            </div>
+            <div id="chat-container" class="chat-layout">
+              <div class="chat-contacts glass-panel">
+                <div class="contacts-search">
+                  <input type="text" placeholder="Поиск контактов..." class="search-input contacts-search-input">
+                </div>
+                <div class="contacts-list" id="contacts-list"></div>
+              </div>
+              <div class="chat-window glass-panel">
+                <div class="chat-window-header" id="chat-window-header">
+                  <span class="chat-placeholder-text">Выберите контакт для начала общения</span>
+                </div>
+                <div class="chat-messages" id="personal-chat-messages"></div>
+                <div class="chat-input-bar" id="personal-chat-input-bar" style="display:none">
+                  <input type="file" id="chat-file-input" accept="image/*" style="display:none">
+                  <button class="icon-btn chat-photo-btn" id="chat-photo-btn">
+                    <img src="assets/icons/nav/Фото.png" alt="" class="nav-icon-img">
+                  </button>
+                  <input type="text" id="personal-chat-input" placeholder="Написать сообщение..." class="chat-input">
+                  <button id="personal-chat-send" class="send-btn">
+                    <img src="assets/icons/nav/Опубликовать.png" alt="" class="nav-icon-img">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ANNOUNCEMENTS PAGE -->
+          <section id="page-announcements" class="page">
+            <div class="section-header glass-panel">
+              <h1>College Announcements</h1>
+              <p>Здесь размещаются объявления колледжа и важная актуальная информация для студентов. В объявлениях могут находиться ссылки, которые переводят на дополнительные образовательные материалы или помогают сразу перейти в нужный раздел внутри самой платформы, где можно подробнее ознакомиться со всей информацией.</p>
+            </div>
+            <div id="announcements-guest-warning" class="guest-warning" style="display:none">
+              <div class="guest-warning-content">
+                <img src="assets/elements/JB.png" alt="" class="guest-warning-img">
+                <div class="guest-overlay">
+                  <p>Пожалуйста войдите в систему чтобы пользоваться полными функциями платформы</p>
+                  <button class="guest-login-btn">Войти</button>
+                </div>
+              </div>
+            </div>
+            <div class="announcements-container" id="announcements-container">
+              <div class="announcement-bg" id="announcement-bg"></div>
+              <div class="announcement-content" id="announcement-content">
+                <div class="announcement-text">
+                  <h2 id="announcement-title"></h2>
+                  <p id="announcement-description"></p>
+                </div>
+                <div class="announcement-image" id="announcement-image"></div>
+              </div>
+              <div class="announcement-nav">
+                <button class="announcement-nav-btn prev" id="announcement-prev">
+                  <img src="assets/icons/nav/Кнопка для перелистывания.png" alt="">
+                </button>
+                <div class="announcement-dots" id="announcement-dots"></div>
+                <button class="announcement-nav-btn next" id="announcement-next">
+                  <img src="assets/icons/nav/Кнопка для перелистывания.png" alt="">
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- PROFILE PAGE -->
+          <section id="page-profile" class="page">
+            <div class="section-header glass-panel">
+              <h1>веб-платформа для студенческих сообществ</h1>
+            </div>
+            <div id="profile-guest-warning" class="guest-warning" style="display:none">
+              <div class="guest-warning-content">
+                <img src="assets/elements/JB.png" alt="" class="guest-warning-img">
+                <div class="guest-overlay">
+                  <p>Пожалуйста войдите в систему чтобы пользоваться полными функциями платформы</p>
+                  <button class="guest-login-btn">Войти</button>
+                </div>
+              </div>
+            </div>
+            <div id="profile-container" class="profile-layout" style="display:none">
+              <div class="profile-left glass-panel">
+                <div class="profile-avatar-wrapper" id="profile-avatar-wrapper">
+                  <img id="profile-avatar" src="" alt="Avatar" class="profile-avatar">
+                  <div class="profile-avatar-overlay" id="profile-avatar-overlay">📷</div>
+                  <input type="file" id="profile-avatar-input" accept="image/*" style="display:none">
+                </div>
+                <h2 id="profile-name"></h2>
+                <p id="profile-role" class="profile-role"></p>
+                <p id="profile-group" class="profile-group"></p>
+              </div>
+              <div class="profile-right glass-panel">
+                <h3>Информация о профиле</h3>
+                <div class="profile-info">
+                  <div class="profile-field">
+                    <label>Имя</label>
+                    <input type="text" id="profile-edit-name" class="profile-input" disabled>
+                  </div>
+                  <div class="profile-field">
+                    <label>Email</label>
+                    <input type="email" id="profile-edit-email" class="profile-input" disabled>
+                  </div>
+                  <div class="profile-field">
+                    <label>Группа</label>
+                    <input type="text" id="profile-edit-group" class="profile-input" disabled>
+                  </div>
+                  <div class="profile-field">
+                    <label>Возраст</label>
+                    <input type="number" id="profile-edit-age" class="profile-input" disabled>
+                  </div>
+                  <div class="profile-field">
+                    <label>Дата рождения</label>
+                    <input type="date" id="profile-edit-birthday" class="profile-input" disabled>
+                  </div>
+                </div>
+                <div class="profile-actions">
+                  <button id="profile-edit-btn" class="auth-btn primary-btn">Редактировать</button>
+                  <button id="profile-save-btn" class="auth-btn primary-btn" style="display:none">Сохранить</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ADMIN PAGE -->
+          <section id="page-admin" class="page">
+            <div class="section-header glass-panel">
+              <h1>Админ-панель</h1>
+            </div>
+            <div class="admin-layout">
+              <div class="admin-sidebar glass-panel">
+                <a class="admin-tab active" data-admin-tab="posts">Посты</a>
+                <a class="admin-tab" data-admin-tab="communities">Сообщества</a>
+                <a class="admin-tab" data-admin-tab="announcements">Объявления</a>
+                <a class="admin-tab" data-admin-tab="gallery">Галерея</a>
+                <a class="admin-tab" data-admin-tab="events">События</a>
+                <a class="admin-tab" data-admin-tab="users">Пользователи</a>
+              </div>
+              <div class="admin-content glass-panel">
+                <div id="admin-posts" class="admin-section active">
+                  <h3>Управление постами</h3>
+                  <form id="admin-post-form" class="admin-form">
+                    <select id="admin-post-community" class="admin-select">
+                      <option value="">Выберите сообщество</option>
+                    </select>
+                    <input type="text" id="admin-post-title" placeholder="Заголовок новости" class="admin-input">
+                    <textarea id="admin-post-content" placeholder="Текст поста..." class="admin-textarea"></textarea>
+                    <select id="admin-post-visibility" class="admin-select">
+                      <option value="community">Только в сообществе</option>
+                      <option value="feed">Только в ленте</option>
+                      <option value="both">Везде (лента + сообщество)</option>
+                    </select>
+                    <label class="admin-file-label">Баннер (для ленты)
+                      <input type="file" id="admin-post-image" accept="image/*" class="admin-file-input">
+                    </label>
+                    <label class="admin-file-label">Фото новости (для карточки в сообществе)
+                      <input type="file" id="admin-post-news-image" accept="image/*" class="admin-file-input">
+                    </label>
+                    <button type="submit" class="auth-btn primary-btn">Опубликовать</button>
+                  </form>
+                  <div id="admin-posts-list" class="admin-list"></div>
+                </div>
+                <div id="admin-communities" class="admin-section" style="display:none">
+                  <h3>Управление сообществами</h3>
+                  <form id="admin-community-form" class="admin-form">
+                    <input type="text" id="admin-comm-title" placeholder="Название" class="admin-input">
+                    <div class="slug-input-wrapper">
+                      <input type="text" id="admin-comm-slug" placeholder="Ссылка (латиницей, например: debates)" class="admin-input" autocomplete="off">
+                      <div class="slug-suggestions" id="slug-suggestions" style="display:none"></div>
+                    </div>
+                    <textarea id="admin-comm-desc" placeholder="Описание сообщества" class="admin-textarea"></textarea>
+                    <label class="admin-file-label">Иконка сообщества
+                      <input type="file" id="admin-comm-icon" accept="image/*" class="admin-file-input">
+                    </label>
+                    <label class="admin-file-label">Обои сообщества
+                      <input type="file" id="admin-comm-bg" accept="image/*" class="admin-file-input">
+                    </label>
+                    <button type="submit" class="auth-btn primary-btn">Создать</button>
+                  </form>
+                  <div id="admin-communities-list" class="admin-list"></div>
+                </div>
+
+                <!-- Community Edit Modal -->
+                <div id="community-edit-modal" class="modal-overlay" style="display:none">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3>Редактировать сообщество</h3>
+                      <button type="button" class="modal-close-btn" id="community-edit-close">&times;</button>
+                    </div>
+                    <form id="community-edit-form" class="admin-form">
+                      <input type="hidden" id="edit-comm-id">
+                      <input type="text" id="edit-comm-title" placeholder="Название" class="admin-input">
+                      <input type="text" id="edit-comm-slug" placeholder="Ссылка (slug)" class="admin-input">
+                      <textarea id="edit-comm-desc" placeholder="Описание" class="admin-textarea"></textarea>
+                      <div class="edit-preview-row">
+                        <div class="edit-preview-item">
+                          <span>Иконка:</span>
+                          <img id="edit-comm-icon-preview" src="" class="edit-preview-img">
+                        </div>
+                        <div class="edit-preview-item">
+                          <span>Обои:</span>
+                          <img id="edit-comm-bg-preview" src="" class="edit-preview-img edit-preview-bg">
+                        </div>
+                      </div>
+                      <label class="admin-file-label">Новая иконка
+                        <input type="file" id="edit-comm-icon" accept="image/*" class="admin-file-input">
+                      </label>
+                      <label class="admin-file-label">Новые обои
+                        <input type="file" id="edit-comm-bg" accept="image/*" class="admin-file-input">
+                      </label>
+                      <button type="submit" class="auth-btn primary-btn">Сохранить</button>
+                    </form>
+                  </div>
+                </div>
+                <div id="admin-announcements" class="admin-section" style="display:none">
+                  <h3>Управление объявлениями</h3>
+                  <form id="admin-announcement-form" class="admin-form">
+                    <input type="text" id="admin-ann-title" placeholder="Заголовок" class="admin-input">
+                    <textarea id="admin-ann-desc" placeholder="Описание" class="admin-textarea"></textarea>
+                    <label class="admin-file-label">Фото объявления
+                      <input type="file" id="admin-ann-image" accept="image/*" class="admin-file-input">
+                    </label>
+                    <label class="admin-file-label">Фон объявления
+                      <input type="file" id="admin-ann-bg" accept="image/*" class="admin-file-input">
+                    </label>
+                    <button type="submit" class="auth-btn primary-btn">Добавить</button>
+                  </form>
+                  <div id="admin-announcements-list" class="admin-list"></div>
+                </div>
+                <div id="admin-gallery" class="admin-section" style="display:none">
+                  <h3>Управление галереей</h3>
+                  <form id="admin-gallery-form" class="admin-form">
+                    <select id="admin-gallery-community" class="admin-select">
+                      <option value="">Выберите сообщество</option>
+                    </select>
+                    <label class="admin-file-label">Фото для галереи (можно несколько)
+                      <input type="file" id="admin-gallery-files" accept="image/*" multiple class="admin-file-input">
+                    </label>
+                    <button type="submit" class="auth-btn primary-btn">Загрузить</button>
+                  </form>
+                  <div id="admin-gallery-preview" class="admin-gallery-preview"></div>
+                  <div id="admin-gallery-list" class="admin-list"></div>
+                </div>
+                <div id="admin-events" class="admin-section" style="display:none">
+                  <h3>Управление событиями</h3>
+                  <form id="admin-event-form" class="admin-form">
+                    <input type="text" id="admin-event-title" placeholder="Название" class="admin-input">
+                    <textarea id="admin-event-desc" placeholder="Описание" class="admin-textarea"></textarea>
+                    <label class="admin-label">Иконка события</label>
+                    <div class="event-icon-picker" id="event-icon-picker">
+                      <div class="event-icon-option" data-icon="book-opened-svgrepo-com 1.png"><img src="assets/icons/events/book-opened-svgrepo-com 1.png" alt="Книга"></div>
+                      <div class="event-icon-option" data-icon="browser-svgrepo-com 1.png"><img src="assets/icons/events/browser-svgrepo-com 1.png" alt="Браузер"></div>
+                      <div class="event-icon-option" data-icon="film-camera-svgrepo-com 1.png"><img src="assets/icons/events/film-camera-svgrepo-com 1.png" alt="Камера"></div>
+                      <div class="event-icon-option" data-icon="map-svgrepo-com 1.png"><img src="assets/icons/events/map-svgrepo-com 1.png" alt="Карта"></div>
+                      <div class="event-icon-option" data-icon="shorts-svgrepo-com 1.png"><img src="assets/icons/events/shorts-svgrepo-com 1.png" alt="Шорты"></div>
+                      <div class="event-icon-option" data-icon="speaker-svgrepo-com 1.png"><img src="assets/icons/events/speaker-svgrepo-com 1.png" alt="Спикер"></div>
+                    </div>
+                    <input type="hidden" id="admin-event-icon" value="">
+                    <input type="date" id="admin-event-date" class="admin-input">
+                    <input type="time" id="admin-event-time" class="admin-input">
+                    <button type="submit" class="auth-btn primary-btn">Добавить</button>
+                  </form>
+                  <div id="admin-events-list" class="admin-list"></div>
+                </div>
+                <div id="admin-users" class="admin-section" style="display:none">
+                  <h3>Управление пользователями</h3>
+                  <div id="admin-users-list" class="admin-list"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Friends Modal -->
+  <div id="friends-modal" class="modal-overlay" style="display:none">
+    <div class="friends-modal">
+      <div class="modal-header">
+        <h3>Друзья</h3>
+        <button class="modal-close" id="close-friends">&times;</button>
+      </div>
+      <div class="friends-modal-search">
+        <input type="text" id="friends-search-input" placeholder="Поиск пользователей...">
+      </div>
+      <div class="friends-modal-tabs">
+        <button class="friends-modal-tab active" data-tab="friends">Мои друзья</button>
+        <button class="friends-modal-tab" data-tab="all">Все пользователи</button>
+      </div>
+      <div class="friends-modal-list" id="friends-modal-list"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/feed.js"></script>
+  <script src="js/friends.js"></script>
+  <script src="js/communities.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/announcements.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Avatar Crop Modal -->
+  <div id="avatar-crop-modal" class="avatar-crop-modal" style="display:none">
+    <div class="avatar-crop-backdrop"></div>
+    <div class="avatar-crop-box">
+      <h3>Обрезать фото</h3>
+      <div class="avatar-crop-container">
+        <img id="avatar-crop-image" src="" alt="">
+      </div>
+      <div class="avatar-crop-actions">
+        <button id="avatar-crop-cancel" class="avatar-crop-btn cancel">Отмена</button>
+        <button id="avatar-crop-save" class="avatar-crop-btn save">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div id="chat-lightbox" class="chat-lightbox" style="display:none">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close">&times;</button>
+      <img id="lightbox-img" src="" alt="">
+      <button class="lightbox-download" title="Скачать">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

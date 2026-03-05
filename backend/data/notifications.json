@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "user_id": 2,
+    "type": "message",
+    "text": "Eldar Muhtarof отправил(а) вам сообщение",
+    "sender_id": 7,
+    "is_read": true,
+    "created_at": "2026-03-01T15:06:26.797Z"
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "type": "message",
+    "text": "Администратор отправил(а) вам сообщение",
+    "sender_id": 1,
+    "is_read": false,
+    "created_at": "2026-03-02T13:45:40.469Z"
+  }
+]
