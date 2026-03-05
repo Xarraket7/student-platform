@@ -26,7 +26,7 @@
 /* Community Icons Grid - 3x2 grid like in mockup */
 .feed-communities-row {
   margin-bottom: 4px;
-  flex: 2.2;
+  flex: 0 0 63%;
   min-height: 0;
   overflow: hidden;
 }
@@ -42,6 +42,7 @@
   height: 100%;
   min-height: 0;
   object-fit: cover;
+  object-position: center 85%;
   border-radius: 14px;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -56,10 +57,11 @@
 /* Posts Section */
 .feed-posts-section {
   margin-bottom: 4px;
-  flex: 0.7;
+  flex: 0 0 27%;
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .feed-posts-header {
   display: flex;
@@ -157,22 +159,22 @@
 
 .post-banner-content {
   width: 100%;
-  padding: 14px 20px;
+  padding: 18px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.05) 100%);
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .post-avatar {
-  width: 40px;
-  height: 40px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255,255,255,0.3);
@@ -180,20 +182,21 @@
 }
 .post-author-info { flex: 1; }
 .post-author-name {
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 600;
   color: #fff;
 }
 .post-author-role {
-  font-size: 12px;
+  font-size: 14px;
   font-family: var(--font-small);
   color: rgba(255,255,255,0.6);
 }
 
 .post-content {
-  font-size: 14px;
+  font-size: 17px;
   font-family: var(--font-small);
   color: rgba(255,255,255,0.9);
-  line-height: 1.35;
+  line-height: 1.45;
   max-width: 55%;
 }
 
@@ -208,15 +211,15 @@
 .post-action {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 16px;
   font-family: var(--font-small);
   color: rgba(255,255,255,0.7);
   cursor: pointer;
   transition: var(--transition);
 }
 .post-action:hover { color: #fff; }
-.post-action img { width: 18px; height: 18px; filter: brightness(0) invert(1); }
+.post-action img { width: 22px; height: 22px; filter: brightness(0) invert(1); }
 .post-action.liked { color: var(--like-color); }
 .post-action.liked img { filter: brightness(0) saturate(100%) invert(38%) sepia(79%) saturate(2700%) hue-rotate(334deg) brightness(100%) contrast(101%); }
 

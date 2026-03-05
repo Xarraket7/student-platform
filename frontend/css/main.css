@@ -57,9 +57,9 @@ img { max-width: 100%; display: block; }
 .main-panel {
   position: relative;
   z-index: 1;
-  width: calc(100% - 48px);
-  max-width: 1480px;
-  height: calc(100vh - 4px);
+  width: calc(100% - 20px);
+  max-width: 1600px;
+  height: calc(100vh - 2px);
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
