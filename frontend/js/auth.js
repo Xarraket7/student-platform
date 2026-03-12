@@ -116,6 +116,17 @@ const Auth = {
           if (registerBtn) {
             google.accounts.id.renderButton(registerBtn, { ...btnOptions, text: 'signup_with' });
           }
+
+          // Mobile: visible Google buttons trigger prompt directly
+          document.querySelectorAll('.google-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                google.accounts.id.prompt();
+              }
+            });
+          });
         };
 
         waitForGsi();

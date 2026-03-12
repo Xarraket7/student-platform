@@ -9,6 +9,23 @@ const Chat = {
     this.loadContacts();
     this.initPhotoButton();
     this.initLightbox();
+    this.initContactSearch();
+  },
+
+  initContactSearch() {
+    const input = document.querySelector('.contacts-search-input');
+    if (!input || input.dataset.bound) return;
+    input.dataset.bound = 'true';
+
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      const contacts = document.querySelectorAll('#contacts-list .contact-item');
+      contacts.forEach(c => {
+        const name = c.querySelector('.contact-name')?.textContent.toLowerCase() || '';
+        const msg = c.querySelector('.contact-last-msg')?.textContent.toLowerCase() || '';
+        c.style.display = (name.includes(query) || msg.includes(query)) ? '' : 'none';
+      });
+    });
   },
 
   async loadContacts() {

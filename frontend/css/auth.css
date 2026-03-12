@@ -35,9 +35,9 @@
 }
 .auth-form {
   padding: 40px 32px;
-  background: rgba(20, 20, 35, 0.75);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(20, 20, 35, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius-2xl);
 }
@@ -164,7 +164,21 @@
 .auth-switch a { color: var(--accent); }
 .auth-switch a:hover { text-decoration: underline; }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .auth-container { width: 92%; }
-  .auth-form { padding: 28px 20px; }
+  .auth-form {
+    padding: 28px 20px;
+    background: rgba(20, 20, 35, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  /* On mobile, make visible button tappable instead of invisible overlay */
+  .google-btn-overlay {
+    display: none !important;
+  }
+  .google-btn {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 2;
+  }
 }
