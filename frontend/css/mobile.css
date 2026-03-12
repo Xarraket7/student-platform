@@ -574,7 +574,8 @@
   /* ===== CHAT (split-view) — iOS Messages style ===== */
   .chat-layout {
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 130px) !important;
+    overflow: hidden;
   }
   .chat-contacts {
     width: 100% !important;
@@ -583,6 +584,7 @@
     border-radius: 16px !important;
     background: rgba(255,255,255,0.04) !important;
     border: 0.5px solid rgba(255,255,255,0.08) !important;
+    overflow-y: auto;
   }
   .chat-window {
     display: none !important;
@@ -592,7 +594,23 @@
   .chat-layout.mobile-chat-open .chat-contacts { display: none !important; }
   .chat-layout.mobile-chat-open .chat-window {
     display: flex !important;
+    flex-direction: column !important;
     flex: 1;
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden;
+  }
+  .chat-layout.mobile-chat-open .chat-messages,
+  .chat-layout.mobile-chat-open #personal-chat-messages {
+    flex: 1;
+    overflow-y: auto !important;
+    min-height: 0;
+  }
+  .chat-layout.mobile-chat-open #personal-chat-input-bar,
+  .chat-layout.mobile-chat-open .chat-input-area {
+    flex-shrink: 0;
+    position: relative;
+    padding-bottom: 8px !important;
   }
 
   /* Contact items — iOS list style */
