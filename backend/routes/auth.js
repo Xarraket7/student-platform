@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
       age: null, birthday: null, group_name: null, google_id: null, is_online: false, friends: []
     });
     const token = generateToken(user);
-    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'lax', secure: req.secure || req.headers['x-forwarded-proto'] === 'https' });
     res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role, avatar: user.avatar } });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     if (!valid) return res.status(401).json({ error: 'Неверный пароль' });
 
     const token = generateToken(user);
-    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'lax', secure: req.secure || req.headers['x-forwarded-proto'] === 'https' });
     res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role, avatar: user.avatar } });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -57,7 +57,7 @@ router.post('/quick-login', (req, res) => {
     if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
 
     const token = generateToken(user);
-    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'lax', secure: req.secure || req.headers['x-forwarded-proto'] === 'https' });
     res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role, avatar: user.avatar } });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -100,7 +100,7 @@ router.post('/google', async (req, res) => {
     }
 
     const token = generateToken(user);
-    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+    res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'lax', secure: req.secure || req.headers['x-forwarded-proto'] === 'https' });
     res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role, avatar: user.avatar } });
   } catch (err) {
     console.error('Google auth error:', err);

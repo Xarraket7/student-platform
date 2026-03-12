@@ -867,6 +867,9 @@
     right: 16px !important;
     max-width: none !important;
     border-radius: 14px !important;
+    transform: none !important;
+    text-align: center;
+    font-size: 13px !important;
   }
 
   /* Profile dropdown — full width on mobile */

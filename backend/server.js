@@ -33,6 +33,9 @@ const io = new Server(server, {
   cors: { origin: '*', credentials: true }
 });
 
+// Trust proxy (for Render/Heroku HTTPS)
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());

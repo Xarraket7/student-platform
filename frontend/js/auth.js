@@ -76,6 +76,17 @@ const Auth = {
   },
 
   initGoogleLogin() {
+    this.googleReady = false;
+
+    // Fallback: if Google never initializes, buttons show a toast
+    document.querySelectorAll('.google-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!this.googleReady) {
+          showToast('Google вход не настроен. Используйте email или быстрый вход.');
+        }
+      });
+    });
+
     const tryInit = async () => {
       try {
         const data = await API.get('/auth/google-client-id');
@@ -118,12 +129,17 @@ const Auth = {
           }
 
           // Mobile: visible Google buttons trigger prompt directly
+          this.googleReady = true;
           document.querySelectorAll('.google-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
               if (window.innerWidth <= 768) {
                 e.preventDefault();
                 e.stopPropagation();
-                google.accounts.id.prompt();
+                google.accounts.id.prompt((notification) => {
+                  if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                    showToast('Google вход недоступен. Используйте email или быстрый вход.');
+                  }
+                });
               }
             });
           });
