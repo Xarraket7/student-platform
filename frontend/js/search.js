@@ -126,44 +126,35 @@ const Search = {
       groups[r.type].push(r);
     });
 
-    let html = '<div class="search-timeline">';
+    let html = '';
     let itemIndex = 0;
 
     for (const [type, items] of Object.entries(groups)) {
-      html += `<div class="search-group">`;
-      html += `<div class="search-group-label"><span class="search-group-icon">${typeIcons[type] || '📄'}</span>${typeLabels[type] || type}<span class="search-group-count">${items.length}</span></div>`;
+      html += `<div class="search-group" data-type="${type}">`;
+      html += `<div class="search-group-label" data-type="${type}"><span class="search-group-icon">${typeIcons[type] || '📄'}</span>${typeLabels[type] || type}<span class="search-group-count">${items.length}</span></div>`;
 
-      items.forEach((item, i) => {
+      items.forEach((item) => {
         const highlighted = this.highlightMatch(item.title, query);
-        // Use emoji icon, fallback if icon looks like a filename
         const isEmoji = item.icon && !item.icon.includes('.') && item.icon.length <= 4;
-        const safeIcon = isEmoji ? item.icon : {community:'👥', post:'📝', event:'📅', announcement:'📢'}[item.type] || '📄';
+        const safeIcon = isEmoji ? item.icon : typeIcons[item.type] || '📄';
         const avatarHtml = item.avatar
           ? `<img src="assets/backgrounds/communities/${item.avatar}" class="search-result-avatar">`
           : `<span class="search-result-icon">${safeIcon}</span>`;
-        const isLast = i === items.length - 1;
 
         html += `
-          <div class="search-result-item ${isLast ? 'last-in-group' : ''}" data-type="${item.type}" data-page="${item.page}" data-id="${item.id}" data-info='${JSON.stringify(item.data || {})}' style="animation-delay: ${itemIndex * 0.04}s">
-            <div class="search-timeline-track">
-              <div class="search-dot"></div>
-              ${!isLast ? '<div class="search-line"></div>' : ''}
+          <div class="search-result-item" data-type="${item.type}" data-page="${item.page}" data-id="${item.id}" data-info='${JSON.stringify(item.data || {})}' style="animation-delay: ${itemIndex * 0.04}s">
+            ${avatarHtml}
+            <div class="search-result-text">
+              <div class="search-result-title">${highlighted}</div>
+              <div class="search-result-subtitle">${item.subtitle}</div>
             </div>
-            <div class="search-result-card">
-              ${avatarHtml}
-              <div class="search-result-text">
-                <div class="search-result-title">${highlighted}</div>
-                <div class="search-result-subtitle">${item.subtitle}</div>
-              </div>
-              <div class="search-result-arrow">›</div>
-            </div>
+            <div class="search-result-arrow">→</div>
           </div>
         `;
         itemIndex++;
       });
       html += '</div>';
     }
-    html += '</div>';
 
     dropdown.innerHTML = html;
     dropdown.classList.add('active');
