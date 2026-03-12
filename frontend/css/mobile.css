@@ -96,16 +96,29 @@
   .nav-left .search-bar .search-input { display: none; }
   .nav-left .search-bar .nav-icon-img { width: 17px; height: 17px; opacity: 0.6; }
 
-  /* Notifications icon */
-  .notifications-btn {
+  /* Notifications icon — compact circle */
+  .nav-bell {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     background: rgba(255,255,255,0.08);
     border: none;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
   }
-  .notifications-btn:active {
+  .nav-bell:active {
     transform: scale(0.9);
+  }
+  .nav-bell .nav-icon-img { width: 18px; height: 18px; opacity: 0.6; }
+  .notification-dot {
+    position: absolute !important;
+    top: 6px !important;
+    right: 6px !important;
+    width: 8px !important;
+    height: 8px !important;
   }
 
   /* Profile mini: avatar only */
@@ -355,7 +368,51 @@
     min-height: 200px;
     max-height: none !important;
   }
-  .feed-right { display: none !important; }
+  /* Feed right sidebar — show friends, hide events/announcements */
+  .feed-right {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .feed-right .right-events,
+  .feed-right .right-announcements { display: none !important; }
+
+  .feed-right .right-friends {
+    background: rgba(255,255,255,0.04) !important;
+    border: 0.5px solid rgba(255,255,255,0.08) !important;
+    border-radius: 16px !important;
+    padding: 12px 14px !important;
+    margin: 0 !important;
+  }
+  .feed-right .friends-header h3 {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+  .feed-right .friends-avatars {
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 14px !important;
+    padding: 8px 0 4px !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .feed-right .friends-avatars::-webkit-scrollbar { display: none; }
+  .feed-right .friend-item {
+    flex-shrink: 0 !important;
+    min-width: 56px;
+  }
+
+  /* Light theme */
+  [data-theme="light"] .feed-right .right-friends {
+    background: rgba(0,0,0,0.03) !important;
+    border-color: rgba(0,0,0,0.06) !important;
+  }
 
   /* News carousel label */
   .feed-posts-section .section-label,
