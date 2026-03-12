@@ -130,7 +130,7 @@ const Profile = {
 
         viewActions.querySelector('.message-btn').addEventListener('click', () => {
           Router.navigate('chat');
-          setTimeout(() => Chat.openChatById(user.id), 500);
+          setTimeout(() => Chat.openChatById(user.id), 800);
         });
 
         const friendBtn = viewActions.querySelector('.friend-btn');

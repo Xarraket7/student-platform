@@ -113,6 +113,19 @@ const Mobile = {
         Mobile.addChatBackButton();
       }
     };
+
+    // Also patch openChatById (used by "Написать" button on profile)
+    const origOpenChatById = Chat.openChatById ? Chat.openChatById.bind(Chat) : null;
+    if (origOpenChatById) {
+      Chat.openChatById = async function(userId) {
+        await origOpenChatById(userId);
+        if (Mobile.isMobile()) {
+          const layout = document.querySelector('.chat-layout');
+          if (layout) layout.classList.add('mobile-chat-open');
+          Mobile.addChatBackButton();
+        }
+      };
+    }
   },
 
   addChatBackButton() {
