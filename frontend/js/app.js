@@ -15,6 +15,9 @@
   // Initialize mobile
   if (typeof Mobile !== 'undefined') Mobile.init();
 
+  // Initialize search
+  if (typeof Search !== 'undefined') Search.init();
+
   // Check if already logged in
   const isLoggedIn = await Auth.checkAuth();
 

@@ -54,6 +54,7 @@ app.use('/api/events', require('./routes/events'));
 app.use('/api/announcements', require('./routes/announcements'));
 app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/friends', require('./routes/friends'));
+app.use('/api/search', require('./routes/search'));
 
 // Chat file upload endpoint
 app.post('/api/upload', (req, res) => {

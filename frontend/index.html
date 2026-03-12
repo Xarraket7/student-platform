@@ -89,7 +89,8 @@
         <div class="nav-left">
           <div class="search-bar">
             <img src="assets/icons/nav/Поиск.png" alt="Search" class="nav-icon-img">
-            <input type="text" placeholder="Поиск..." class="search-input">
+            <input type="text" placeholder="Поиск..." class="search-input" id="desktop-search-input" autocomplete="off">
+            <div class="search-dropdown" id="desktop-search-dropdown"></div>
           </div>
         </div>
         <div class="nav-center">
@@ -135,9 +136,10 @@
       <!-- Mobile Search Overlay -->
       <div class="mobile-search-overlay" id="mobile-search-overlay">
         <div class="mobile-search-bar">
-          <input type="text" placeholder="Поиск..." class="mobile-search-input" id="mobile-search-input">
+          <input type="text" placeholder="Поиск..." class="mobile-search-input" id="mobile-search-input" autocomplete="off">
           <button class="mobile-search-close" id="mobile-search-close">&times;</button>
         </div>
+        <div class="search-dropdown mobile-search-dropdown" id="mobile-search-dropdown"></div>
       </div>
 
       <!-- Notifications Dropdown -->
@@ -682,6 +684,7 @@
   <script src="js/profile.js"></script>
   <script src="js/admin.js"></script>
   <script src="js/mobile.js"></script>
+  <script src="js/search.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
   <script src="js/app.js"></script>
 
