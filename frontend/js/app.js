@@ -12,6 +12,9 @@
   // Initialize friends
   Friends.init();
 
+  // Initialize mobile
+  if (typeof Mobile !== 'undefined') Mobile.init();
+
   // Check if already logged in
   const isLoggedIn = await Auth.checkAuth();
 

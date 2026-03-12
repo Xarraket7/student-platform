@@ -1,3 +1,4 @@
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -8,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const store = require('./data/store');
 const { verifyToken, SECRET } = require('./middleware/auth');
-require('dotenv').config();
 
 // Chat file upload config
 const chatStorage = multer.diskStorage({

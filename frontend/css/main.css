@@ -8,8 +8,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
-html {
-  zoom: 0.77;
+@media (min-width: 769px) {
+  html { zoom: 0.77; }
 }
 html, body {
   width: 100%;

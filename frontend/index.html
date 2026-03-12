@@ -15,10 +15,12 @@
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/auth.css">
   <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/mobile.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
   <!-- Auth Pages (shown when on login/register route) -->
@@ -37,10 +39,13 @@
         </div>
         <button id="login-btn" class="auth-btn primary-btn">Войти</button>
         <div class="auth-divider"><span>или</span></div>
-        <button id="google-login-btn" class="auth-btn google-btn">
-          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
-          Войти через Google
-        </button>
+        <div class="google-btn-wrapper">
+          <button class="auth-btn google-btn" type="button">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+            Войти через Google
+          </button>
+          <div id="google-login-btn" class="google-btn-overlay"></div>
+        </div>
         <div class="auth-divider"><span>быстрый вход</span></div>
         <div class="quick-login-buttons">
           <button class="quick-login-btn" data-role="admin">Войти как Админ</button>
@@ -60,10 +65,13 @@
         </div>
         <button id="register-btn" class="auth-btn primary-btn">Зарегистрироваться</button>
         <div class="auth-divider"><span>или</span></div>
-        <button class="auth-btn google-btn">
-          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
-          Регистрация через Google
-        </button>
+        <div class="google-btn-wrapper">
+          <button class="auth-btn google-btn" type="button">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+            Регистрация через Google
+          </button>
+          <div id="google-register-btn" class="google-btn-overlay"></div>
+        </div>
         <p class="auth-switch">Уже есть аккаунт? <a href="#" id="show-login">Вход</a></p>
       </div>
     </div>
@@ -123,6 +131,14 @@
           </div>
         </div>
       </nav>
+
+      <!-- Mobile Search Overlay -->
+      <div class="mobile-search-overlay" id="mobile-search-overlay">
+        <div class="mobile-search-bar">
+          <input type="text" placeholder="Поиск..." class="mobile-search-input" id="mobile-search-input">
+          <button class="mobile-search-close" id="mobile-search-close">&times;</button>
+        </div>
+      </div>
 
       <!-- Notifications Dropdown -->
       <div id="notifications-dropdown" class="notifications-dropdown" style="display:none">
@@ -438,6 +454,10 @@
                   <button id="profile-edit-btn" class="auth-btn primary-btn">Редактировать</button>
                   <button id="profile-save-btn" class="auth-btn primary-btn" style="display:none">Сохранить</button>
                 </div>
+                <button id="mobile-logout-btn" class="mobile-logout-btn">
+                  <img src="assets/icons/nav/Выйти I Войти.png" alt="" class="mobile-logout-icon">
+                  <span id="mobile-auth-action-text">Выйти</span>
+                </button>
               </div>
             </div>
           </section>
@@ -598,6 +618,34 @@
         </main>
       </div>
     </div>
+
+    <!-- Mobile Bottom Tab Bar -->
+    <nav class="mobile-bottom-bar" id="mobile-bottom-bar">
+      <button class="mobile-tab active" data-page="feed">
+        <img src="assets/icons/nav/Лента, Галерея.png" alt="" class="mobile-tab-icon">
+        <span>Лента</span>
+      </button>
+      <button class="mobile-tab" data-page="communities">
+        <img src="assets/icons/nav/Сообщества.png" alt="" class="mobile-tab-icon">
+        <span>Сообщества</span>
+      </button>
+      <button class="mobile-tab" data-page="events">
+        <img src="assets/icons/nav/События, Новости.png" alt="" class="mobile-tab-icon">
+        <span>События</span>
+      </button>
+      <button class="mobile-tab" data-page="chat">
+        <img src="assets/icons/nav/Чат, Общий чат.png" alt="" class="mobile-tab-icon">
+        <span>Чат</span>
+      </button>
+      <button class="mobile-tab" data-page="announcements">
+        <img src="assets/icons/nav/Объявления.png" alt="" class="mobile-tab-icon">
+        <span>Объявления</span>
+      </button>
+      <button class="mobile-tab" data-page="profile">
+        <svg class="mobile-tab-icon mobile-tab-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Профиль</span>
+      </button>
+    </nav>
   </div>
 
   <!-- Friends Modal -->
@@ -633,6 +681,7 @@
   <script src="js/announcements.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/admin.js"></script>
+  <script src="js/mobile.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
   <script src="js/app.js"></script>
 

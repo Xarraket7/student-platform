@@ -16,6 +16,9 @@ const Auth = {
       btn.addEventListener('click', () => this.quickLogin(btn.dataset.role));
     });
 
+    // Google login
+    this.initGoogleLogin();
+
     // Toggle forms
     document.getElementById('show-register').addEventListener('click', (e) => {
       e.preventDefault();
@@ -69,6 +72,68 @@ const Auth = {
     if (this.bgInterval) {
       clearInterval(this.bgInterval);
       this.bgInterval = null;
+    }
+  },
+
+  initGoogleLogin() {
+    const tryInit = async () => {
+      try {
+        const data = await API.get('/auth/google-client-id');
+        if (!data.clientId || data.clientId === 'your_google_client_id') {
+          console.warn('Google Client ID не настроен');
+          return;
+        }
+
+        const waitForGsi = () => {
+          if (typeof google === 'undefined' || !google.accounts) {
+            setTimeout(waitForGsi, 200);
+            return;
+          }
+
+          google.accounts.id.initialize({
+            client_id: data.clientId,
+            callback: (response) => this.handleGoogleCredential(response),
+            auto_select: false,
+            cancel_on_tap_outside: true,
+          });
+
+          // Render real Google buttons
+          const btnOptions = {
+            theme: 'outline',
+            size: 'large',
+            width: 356,
+            text: 'signin_with',
+            shape: 'rectangular',
+            locale: 'ru',
+          };
+
+          const loginBtn = document.getElementById('google-login-btn');
+          if (loginBtn) {
+            google.accounts.id.renderButton(loginBtn, btnOptions);
+          }
+
+          const registerBtn = document.getElementById('google-register-btn');
+          if (registerBtn) {
+            google.accounts.id.renderButton(registerBtn, { ...btnOptions, text: 'signup_with' });
+          }
+        };
+
+        waitForGsi();
+      } catch (e) {
+        console.warn('Google login init error:', e);
+      }
+    };
+
+    tryInit();
+  },
+
+  async handleGoogleCredential(response) {
+    try {
+      const data = await API.post('/auth/google', { credential: response.credential });
+      this.user = data.user;
+      this.onLogin();
+    } catch (err) {
+      showToast(err.message || 'Ошибка входа через Google');
     }
   },
 

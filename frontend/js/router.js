@@ -143,6 +143,17 @@ const Router = {
       );
     }
 
+    // Update mobile bottom bar
+    if (typeof Mobile !== 'undefined') {
+      Mobile.updateBottomBar(page);
+    }
+
+    // Reset mobile chat view when leaving chat
+    if (page !== 'chat') {
+      const chatLayout = document.querySelector('.chat-layout');
+      if (chatLayout) chatLayout.classList.remove('mobile-chat-open');
+    }
+
     // Update background for specific pages
     this.updateBackground(page, data);
 

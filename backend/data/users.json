@@ -10,8 +10,17 @@
     "birthday": null,
     "group_name": null,
     "google_id": null,
-    "is_online": true,
-    "friends": [],
+    "is_online": false,
+    "friends": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      7
+    ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
   {
@@ -25,12 +34,13 @@
     "birthday": "2006-05-12",
     "group_name": "ИС22-4Б",
     "google_id": null,
-    "is_online": true,
+    "is_online": false,
     "friends": [
       3,
       4,
       6,
-      7
+      7,
+      1
     ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
@@ -48,7 +58,8 @@
     "is_online": true,
     "friends": [
       6,
-      2
+      2,
+      1
     ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
@@ -65,7 +76,8 @@
     "google_id": null,
     "is_online": true,
     "friends": [
-      2
+      2,
+      1
     ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
@@ -81,7 +93,9 @@
     "group_name": "SE-2203",
     "google_id": null,
     "is_online": true,
-    "friends": [],
+    "friends": [
+      1
+    ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
   {
@@ -98,7 +112,8 @@
     "is_online": true,
     "friends": [
       3,
-      2
+      2,
+      1
     ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
@@ -115,7 +130,8 @@
     "google_id": null,
     "is_online": true,
     "friends": [
-      2
+      2,
+      1
     ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
@@ -131,7 +147,9 @@
     "group_name": "SE-2204",
     "google_id": null,
     "is_online": true,
-    "friends": [],
+    "friends": [
+      1
+    ],
     "created_at": "2026-01-01T00:00:00.000Z"
   },
   {
@@ -146,7 +164,24 @@
     "group_name": "SE-2201",
     "google_id": null,
     "is_online": false,
-    "friends": [],
+    "friends": [
+      1
+    ],
     "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "name": "Dal mare",
+    "email": "said.amankeldin@gmail.com",
+    "password": null,
+    "role": "student",
+    "avatar": "1772762121296-avatar.png",
+    "age": null,
+    "birthday": null,
+    "group_name": null,
+    "google_id": "114370835632043386436",
+    "is_online": false,
+    "friends": [],
+    "created_at": "2026-03-06T01:54:55.665Z"
   }
 ]
