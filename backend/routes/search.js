@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
         id: e.id,
         title: e.title,
         subtitle: e.event_date ? new Date(e.event_date).toLocaleDateString('ru-RU') : 'Событие',
-        icon: e.icon || '📅',
+        icon: '📅',
         page: 'events',
         data: null
       });
