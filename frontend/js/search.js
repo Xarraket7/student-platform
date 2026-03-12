@@ -42,8 +42,10 @@ const Search = {
       if (query.length < 1) {
         dropdown.innerHTML = '';
         dropdown.classList.remove('active');
+        input.closest('.search-bar, .mobile-search-bar')?.classList.remove('search-active');
         return;
       }
+      input.closest('.search-bar, .mobile-search-bar')?.classList.add('search-active');
 
       this.debounceTimer = setTimeout(() => this.search(query, dropdown), 200);
     });
@@ -95,7 +97,11 @@ const Search = {
 
   renderResults(results, dropdown, query) {
     if (!results || results.length === 0) {
-      dropdown.innerHTML = '<div class="search-no-results">Ничего не найдено</div>';
+      dropdown.innerHTML = `
+        <div class="search-no-results">
+          <div class="search-no-results-icon">🔍</div>
+          <div>Ничего не найдено</div>
+        </div>`;
       dropdown.classList.add('active');
       return;
     }
@@ -108,32 +114,53 @@ const Search = {
       event: 'События',
       announcement: 'Объявления'
     };
+    const typeIcons = {
+      community: '👥',
+      post: '📝',
+      event: '📅',
+      announcement: '📢'
+    };
 
     results.forEach(r => {
       if (!groups[r.type]) groups[r.type] = [];
       groups[r.type].push(r);
     });
 
-    let html = '';
+    let html = '<div class="search-timeline">';
+    let itemIndex = 0;
+
     for (const [type, items] of Object.entries(groups)) {
-      html += `<div class="search-group-label">${typeLabels[type] || type}</div>`;
-      items.forEach(item => {
+      html += `<div class="search-group">`;
+      html += `<div class="search-group-label"><span class="search-group-icon">${typeIcons[type] || '📄'}</span>${typeLabels[type] || type}<span class="search-group-count">${items.length}</span></div>`;
+
+      items.forEach((item, i) => {
         const highlighted = this.highlightMatch(item.title, query);
         const avatarHtml = item.avatar
           ? `<img src="assets/backgrounds/communities/${item.avatar}" class="search-result-avatar">`
           : `<span class="search-result-icon">${item.icon}</span>`;
+        const isLast = i === items.length - 1;
 
         html += `
-          <div class="search-result-item" data-type="${item.type}" data-page="${item.page}" data-id="${item.id}" data-info='${JSON.stringify(item.data || {})}'>
-            ${avatarHtml}
-            <div class="search-result-text">
-              <div class="search-result-title">${highlighted}</div>
-              <div class="search-result-subtitle">${item.subtitle}</div>
+          <div class="search-result-item ${isLast ? 'last-in-group' : ''}" data-type="${item.type}" data-page="${item.page}" data-id="${item.id}" data-info='${JSON.stringify(item.data || {})}' style="animation-delay: ${itemIndex * 0.04}s">
+            <div class="search-timeline-track">
+              <div class="search-dot"></div>
+              ${!isLast ? '<div class="search-line"></div>' : ''}
+            </div>
+            <div class="search-result-card">
+              ${avatarHtml}
+              <div class="search-result-text">
+                <div class="search-result-title">${highlighted}</div>
+                <div class="search-result-subtitle">${item.subtitle}</div>
+              </div>
+              <div class="search-result-arrow">›</div>
             </div>
           </div>
         `;
+        itemIndex++;
       });
+      html += '</div>';
     }
+    html += '</div>';
 
     dropdown.innerHTML = html;
     dropdown.classList.add('active');
@@ -171,6 +198,9 @@ const Search = {
   closeAll() {
     document.querySelectorAll('.search-dropdown').forEach(d => {
       d.classList.remove('active');
+    });
+    document.querySelectorAll('.search-active').forEach(el => {
+      el.classList.remove('search-active');
     });
   }
 };
