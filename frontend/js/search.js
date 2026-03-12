@@ -135,9 +135,12 @@ const Search = {
 
       items.forEach((item, i) => {
         const highlighted = this.highlightMatch(item.title, query);
+        // Use emoji icon, fallback if icon looks like a filename
+        const isEmoji = item.icon && !item.icon.includes('.') && item.icon.length <= 4;
+        const safeIcon = isEmoji ? item.icon : {community:'👥', post:'📝', event:'📅', announcement:'📢'}[item.type] || '📄';
         const avatarHtml = item.avatar
           ? `<img src="assets/backgrounds/communities/${item.avatar}" class="search-result-avatar">`
-          : `<span class="search-result-icon">${item.icon}</span>`;
+          : `<span class="search-result-icon">${safeIcon}</span>`;
         const isLast = i === items.length - 1;
 
         html += `
