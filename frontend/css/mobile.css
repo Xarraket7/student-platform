@@ -543,25 +543,59 @@
   }
   .community-sidebar-bottom { display: none; }
 
-  .community-content { flex: 1; min-height: 0; overflow: hidden; }
+  .community-content { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
 
   /* Community chat — keep input bar above bottom nav */
   .community-inner-active .main-content {
     overflow: hidden !important;
-    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
-    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
+    padding: 10px 12px 0 12px !important;
+    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
   }
-  .community-chat-area {
-    max-height: 100% !important;
+  @supports (height: 100dvh) {
+    .community-inner-active .main-content {
+      height: calc(100dvh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+      max-height: calc(100dvh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    }
+  }
+  .community-inner-active #page-community-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
     overflow: hidden !important;
   }
+  .community-inner-active .community-header {
+    flex-shrink: 0;
+  }
+  .community-inner-active .community-layout {
+    flex: 1 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #community-chat.active {
+    flex: 1 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .community-chat-area {
+    flex: 1 !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
   .community-chat-area .chat-messages {
-    flex: 1;
-    min-height: 0;
+    flex: 1 !important;
+    min-height: 0 !important;
     overflow-y: auto !important;
   }
   .community-chat-area .chat-input-bar {
-    flex-shrink: 0;
+    flex-shrink: 0 !important;
     padding: 8px 10px !important;
   }
   .news-grid { grid-template-columns: 1fr !important; overflow-y: auto; gap: 8px; }
@@ -596,10 +630,16 @@
   #page-chat > .section-header { display: none !important; }
   /* Prevent page from scrolling past bottom nav on chat page */
   .chat-page-active .main-content {
-    padding-bottom: 0 !important;
+    padding: 10px 12px 0 12px !important;
     overflow: hidden !important;
-    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
-    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
+    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+  }
+  @supports (height: 100dvh) {
+    .chat-page-active .main-content {
+      height: calc(100dvh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+      max-height: calc(100dvh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    }
   }
 
   .chat-layout {
