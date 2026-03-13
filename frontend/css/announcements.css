@@ -62,6 +62,20 @@ body.announcements-mode .search-input::placeholder {
 body.announcements-mode .user-name-mini {
   color: #ffffff !important;
 }
+body.announcements-mode .avatar-mini {
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+body.announcements-mode .profile-mini {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+body.announcements-mode .nav-icon-img {
+  filter: brightness(2) !important;
+}
+body.announcements-mode .mobile-theme-btn svg,
+body.announcements-mode .mobile-friends-btn svg {
+  stroke: rgba(255, 255, 255, 0.8) !important;
+}
 
 /* Section header transparent in announcements */
 body.announcements-mode .section-header.glass-panel {

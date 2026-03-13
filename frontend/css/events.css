@@ -62,6 +62,23 @@
   gap: 5px;
 }
 
+/* Light theme: keep text white since event cards have dark glass bg */
+[data-theme="light"] .event-card {
+  color: #fff;
+}
+[data-theme="light"] .event-card-title {
+  color: #fff !important;
+}
+[data-theme="light"] .event-card-desc {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+[data-theme="light"] .event-card-meta {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+[data-theme="light"] #page-events .section-header h2 {
+  color: #fff !important;
+}
+
 @media (max-width: 768px) {
   .events-grid { grid-template-columns: 1fr; }
 }

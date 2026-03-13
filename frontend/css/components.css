@@ -886,6 +886,12 @@
     linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.15)) border-box;
   border: 1px solid transparent;
 }
+[data-theme="light"] .search-input {
+  color: #fff !important;
+}
+[data-theme="light"] .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
 
 /* Glass panels */
 [data-theme="light"] .glass-panel {
