@@ -123,8 +123,10 @@ const Communities = {
       // Grid news cards with optional news_image, likes and comments
       const newsHTML = gridPosts.map(post => {
         const cardImage = post.news_image ? `assets/photos/${post.news_image}` : '';
+        const safeContent = (post.content || '').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+        const safeTitle = (post.title || post.content.substring(0, 40)).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
         return `
-          <div class="news-card">
+          <div class="news-card" data-news-title="${safeTitle}" data-news-content="${safeContent}" data-news-image="${cardImage}" data-news-likes="${post.likes_count || 0}" data-news-comments="${post.comments_count || 0}" data-post-id="${post.id}">
             <div class="news-card-title">${post.title || post.content.substring(0, 40)}</div>
             <div class="news-card-content">${post.content}</div>
             ${cardImage ? `<div class="news-card-image"><img src="${cardImage}" alt=""></div>` : ''}
@@ -222,7 +224,100 @@ const Communities = {
       gsap.fromTo(container.querySelectorAll('.news-card, .community-featured-post, .community-welcome'),
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 });
+
+      // Mobile: tap news card → open detail modal
+      if (window.innerWidth <= 768) {
+        container.querySelectorAll('.news-card[data-news-title]').forEach(card => {
+          card.addEventListener('click', (e) => {
+            // Don't open modal if clicking like/comment on desktop
+            if (e.target.closest('.post-action')) return;
+            this.openNewsModal(card);
+          });
+        });
+      }
     } catch (e) { console.error(e); }
+  },
+
+  openNewsModal(card) {
+    // Remove existing modal
+    document.querySelector('.news-detail-modal')?.remove();
+
+    const title = card.dataset.newsTitle;
+    const content = card.dataset.newsContent;
+    const image = card.dataset.newsImage;
+    const likes = card.dataset.newsLikes;
+    const comments = card.dataset.newsComments;
+    const postId = card.dataset.postId;
+
+    const modal = document.createElement('div');
+    modal.className = 'news-detail-modal';
+    modal.innerHTML = `
+      <div class="news-modal-sheet">
+        <div class="news-modal-handle"></div>
+        ${image ? `<img src="${image}" class="news-modal-image" alt="">` : ''}
+        <div class="news-modal-body">
+          <div class="news-modal-title">${title}</div>
+          <div class="news-modal-content">${content}</div>
+          <div class="news-modal-actions">
+            <div class="post-action like-btn" data-post-id="${postId}">
+              <img src="assets/icons/nav/Лайк 1.png" alt="">
+              <span class="like-count">${likes}</span>
+            </div>
+            <div class="post-action comment-btn" data-post-id="${postId}">
+              <img src="assets/icons/nav/Комм.png" alt="">
+              <span>${comments}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Like/comment handlers inside modal
+    modal.querySelector('.like-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Feed.toggleLike(modal.querySelector('.like-btn'));
+    });
+    modal.querySelector('.comment-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Feed.openComments(postId, modal.querySelector('.comment-btn'));
+    });
+
+    // Animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => modal.classList.add('active'));
+    });
+
+    // Close on backdrop tap
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+      }
+    });
+
+    // Swipe down to close
+    let startY = 0;
+    const sheet = modal.querySelector('.news-modal-sheet');
+    sheet.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    sheet.addEventListener('touchmove', (e) => {
+      const diff = e.touches[0].clientY - startY;
+      if (diff > 0) {
+        sheet.style.transform = `translateY(${diff}px)`;
+      }
+    }, { passive: true });
+    sheet.addEventListener('touchend', (e) => {
+      const diff = e.changedTouches[0].clientY - startY;
+      if (diff > 100) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+      } else {
+        sheet.style.transform = '';
+      }
+    });
   },
 
   pendingFiles: [],
