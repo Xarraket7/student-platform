@@ -572,18 +572,18 @@
   .event-card-meta { font-size: 12px; opacity: 0.5; }
 
   /* ===== CHAT (split-view) — iOS Messages style ===== */
+  /* Hide big header on chat page to save space on mobile */
+  #page-chat > .section-header { display: none !important; }
+  /* Prevent page from scrolling past bottom nav on chat page */
   .chat-page-active .main-content {
-    padding-bottom: calc(var(--mobile-bar-h) + var(--mobile-safe-bottom)) !important;
-    height: calc(100vh - 56px) !important;
-    max-height: calc(100vh - 56px) !important;
+    padding-bottom: 0 !important;
     overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
+    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
   }
+
   .chat-layout {
     flex-direction: column;
-    flex: 1 !important;
-    min-height: 0 !important;
     overflow: hidden;
   }
   .chat-contacts {
@@ -599,15 +599,14 @@
     display: none !important;
     border-radius: 16px !important;
   }
-  /* Hide big header on chat page to save space on mobile */
-  #page-chat > .section-header { display: none !important; }
   .chat-layout.mobile-chat-open .chat-contacts { display: none !important; }
   .chat-layout.mobile-chat-open .chat-window {
     display: flex !important;
     flex-direction: column !important;
     flex: 1;
-    min-height: 0 !important;
     overflow: hidden;
+    /* Constrain height: viewport minus top-nav, bottom-bar, and padding */
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 24px) !important;
   }
   .chat-layout.mobile-chat-open .chat-messages,
   .chat-layout.mobile-chat-open #personal-chat-messages {
@@ -615,11 +614,9 @@
     overflow-y: auto !important;
     min-height: 0;
   }
-  .chat-layout.mobile-chat-open #personal-chat-input-bar,
-  .chat-layout.mobile-chat-open .chat-input-area {
+  .chat-layout.mobile-chat-open #personal-chat-input-bar {
     flex-shrink: 0;
-    position: relative;
-    padding-bottom: 4px !important;
+    padding: 6px 10px !important;
   }
 
   /* Contact items — iOS list style */
