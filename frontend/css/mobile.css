@@ -12,6 +12,7 @@
 .section-desc-toggle { display: none; }
 .mobile-logout-btn { display: none; }
 .mobile-friends-btn { display: none !important; }
+.mobile-theme-btn { display: none !important; }
 
 /* ========== TABLET (≤1024px) ========== */
 @media (max-width: 1024px) {
@@ -455,6 +456,35 @@
     border-radius: 50%;
     background: #10b981;
     border: 1.5px solid rgba(10,10,20,0.9);
+  }
+
+  /* Mobile theme toggle button */
+  .mobile-theme-btn {
+    display: flex !important;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+  }
+  .mobile-theme-btn:active { transform: scale(0.9); }
+  .mobile-theme-btn svg {
+    width: 18px; height: 18px;
+    stroke: rgba(255,255,255,0.6);
+    fill: none;
+    stroke-width: 1.8;
+  }
+  /* Light theme: show moon icon instead */
+  [data-theme="light"] .mobile-theme-btn {
+    background: rgba(0,0,0,0.06);
+  }
+  [data-theme="light"] .mobile-theme-btn svg {
+    stroke: rgba(0,0,0,0.5);
   }
 
   /* News carousel label */

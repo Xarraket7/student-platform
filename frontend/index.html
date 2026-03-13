@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Community Platform</title>
-  <link rel="stylesheet" href="css/variables.css?v=12">
-  <link rel="stylesheet" href="css/main.css?v=12">
-  <link rel="stylesheet" href="css/components.css?v=12">
-  <link rel="stylesheet" href="css/feed.css?v=12">
-  <link rel="stylesheet" href="css/communities.css?v=12">
-  <link rel="stylesheet" href="css/events.css?v=12">
-  <link rel="stylesheet" href="css/chat.css?v=12">
-  <link rel="stylesheet" href="css/announcements.css?v=12">
-  <link rel="stylesheet" href="css/profile.css?v=12">
-  <link rel="stylesheet" href="css/auth.css?v=12">
-  <link rel="stylesheet" href="css/admin.css?v=12">
-  <link rel="stylesheet" href="css/mobile.css?v=12">
+  <link rel="stylesheet" href="css/variables.css?v=13">
+  <link rel="stylesheet" href="css/main.css?v=13">
+  <link rel="stylesheet" href="css/components.css?v=13">
+  <link rel="stylesheet" href="css/feed.css?v=13">
+  <link rel="stylesheet" href="css/communities.css?v=13">
+  <link rel="stylesheet" href="css/events.css?v=13">
+  <link rel="stylesheet" href="css/chat.css?v=13">
+  <link rel="stylesheet" href="css/announcements.css?v=13">
+  <link rel="stylesheet" href="css/profile.css?v=13">
+  <link rel="stylesheet" href="css/auth.css?v=13">
+  <link rel="stylesheet" href="css/admin.css?v=13">
+  <link rel="stylesheet" href="css/mobile.css?v=13">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -125,6 +125,11 @@
           </button>
           <button id="theme-toggle" class="icon-btn" style="display:none">
             <img src="assets/icons/nav/Тема.png" alt="Theme" class="nav-icon-img">
+          </button>
+          <button class="mobile-theme-btn" id="mobile-theme-btn" onclick="if(typeof ThemeManager!=='undefined')ThemeManager.toggle()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
           </button>
           <div id="profile-mini" class="profile-mini" data-page="profile">
             <img id="user-avatar-mini" src="assets/avatars/Admin.png" alt="Profile" class="avatar-mini">
@@ -675,22 +680,22 @@
   <!-- Toast Notification -->
   <div id="toast" class="toast" style="display:none"></div>
 
-  <script src="js/api.js?v=12"></script>
-  <script src="js/theme.js?v=12"></script>
-  <script src="js/auth.js?v=12"></script>
-  <script src="js/router.js?v=12"></script>
-  <script src="js/feed.js?v=12"></script>
-  <script src="js/friends.js?v=12"></script>
-  <script src="js/communities.js?v=12"></script>
-  <script src="js/events.js?v=12"></script>
-  <script src="js/chat.js?v=12"></script>
-  <script src="js/announcements.js?v=12"></script>
-  <script src="js/profile.js?v=12"></script>
-  <script src="js/admin.js?v=12"></script>
-  <script src="js/mobile.js?v=12"></script>
-  <script src="js/search.js?v=12"></script>
+  <script src="js/api.js?v=13"></script>
+  <script src="js/theme.js?v=13"></script>
+  <script src="js/auth.js?v=13"></script>
+  <script src="js/router.js?v=13"></script>
+  <script src="js/feed.js?v=13"></script>
+  <script src="js/friends.js?v=13"></script>
+  <script src="js/communities.js?v=13"></script>
+  <script src="js/events.js?v=13"></script>
+  <script src="js/chat.js?v=13"></script>
+  <script src="js/announcements.js?v=13"></script>
+  <script src="js/profile.js?v=13"></script>
+  <script src="js/admin.js?v=13"></script>
+  <script src="js/mobile.js?v=13"></script>
+  <script src="js/search.js?v=13"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
-  <script src="js/app.js?v=12"></script>
+  <script src="js/app.js?v=13"></script>
 
   <!-- Avatar Crop Modal -->
   <div id="avatar-crop-modal" class="avatar-crop-modal" style="display:none">
