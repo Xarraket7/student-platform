@@ -597,6 +597,8 @@
   .community-chat-area .chat-input-bar {
     flex-shrink: 0 !important;
     padding: 8px 10px !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 0 !important;
   }
   .news-grid { grid-template-columns: 1fr !important; overflow-y: auto; gap: 8px; }
   .news-card { border-radius: 14px !important; }
@@ -645,6 +647,9 @@
   .chat-layout {
     flex-direction: column;
     overflow: hidden;
+    flex: 1;
+    height: 100% !important;
+    max-height: 100% !important;
   }
   .chat-contacts {
     width: 100% !important;

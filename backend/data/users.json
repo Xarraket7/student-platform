@@ -10,7 +10,7 @@
     "birthday": null,
     "group_name": null,
     "google_id": null,
-    "is_online": false,
+    "is_online": true,
     "friends": [
       2,
       3,
@@ -53,7 +53,7 @@
     "role": "student",
     "age": 19,
     "birthday": "2006-08-23",
-    "group_name": "SE-2201",
+    "group_name": "ТЗИ22-3А",
     "google_id": null,
     "is_online": true,
     "friends": [
@@ -72,7 +72,7 @@
     "role": "student",
     "age": 20,
     "birthday": "2005-11-04",
-    "group_name": "SE-2202",
+    "group_name": "РЭТ22-1Б",
     "google_id": null,
     "is_online": true,
     "friends": [
@@ -90,7 +90,7 @@
     "role": "student",
     "age": 19,
     "birthday": "2006-03-15",
-    "group_name": "SE-2203",
+    "group_name": "П22-2А",
     "google_id": null,
     "is_online": true,
     "friends": [
@@ -107,7 +107,7 @@
     "role": "student",
     "age": 19,
     "birthday": "2006-07-20",
-    "group_name": "SE-2201",
+    "group_name": "ИС22-3А",
     "google_id": null,
     "is_online": true,
     "friends": [
@@ -144,7 +144,7 @@
     "role": "student",
     "age": 20,
     "birthday": "2005-12-01",
-    "group_name": "SE-2204",
+    "group_name": "РЭТ22-2А",
     "google_id": null,
     "is_online": true,
     "friends": [
@@ -161,7 +161,7 @@
     "role": "student",
     "age": 19,
     "birthday": "2006-01-30",
-    "group_name": "SE-2201",
+    "group_name": "П22-1Б",
     "google_id": null,
     "is_online": false,
     "friends": [
