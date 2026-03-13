@@ -543,7 +543,27 @@
   }
   .community-sidebar-bottom { display: none; }
 
-  .community-content { flex: 1; min-height: 0; }
+  .community-content { flex: 1; min-height: 0; overflow: hidden; }
+
+  /* Community chat — keep input bar above bottom nav */
+  .community-inner-active .main-content {
+    overflow: hidden !important;
+    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
+  }
+  .community-chat-area {
+    max-height: 100% !important;
+    overflow: hidden !important;
+  }
+  .community-chat-area .chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto !important;
+  }
+  .community-chat-area .chat-input-bar {
+    flex-shrink: 0;
+    padding: 8px 10px !important;
+  }
   .news-grid { grid-template-columns: 1fr !important; overflow-y: auto; gap: 8px; }
   .news-card { border-radius: 14px !important; }
   .community-bottom-row { flex-direction: column; height: auto; }
