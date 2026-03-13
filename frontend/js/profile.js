@@ -128,37 +128,30 @@ const Profile = {
           </button>
         `;
 
-        viewActions.querySelector('.message-btn').addEventListener('click', () => {
+        viewActions.querySelector('.message-btn').addEventListener('click', async () => {
           Router.navigate('chat');
-          // Wait for chat page to be ready, then open specific chat
-          const waitAndOpen = () => {
-            const chatWindow = document.getElementById('chat-window-header');
-            if (chatWindow) {
-              Chat.openChatById(user.id);
-              // On mobile: show chat window
-              if (window.innerWidth <= 768) {
-                const layout = document.querySelector('.chat-layout');
-                if (layout) layout.classList.add('mobile-chat-open');
-                // Add back button
-                setTimeout(() => {
-                  const header = document.getElementById('chat-window-header');
-                  if (header && !header.querySelector('.mobile-chat-back')) {
-                    const btn = document.createElement('button');
-                    btn.className = 'mobile-chat-back';
-                    btn.innerHTML = '&#8249;';
-                    btn.addEventListener('click', () => {
-                      const l = document.querySelector('.chat-layout');
-                      if (l) l.classList.remove('mobile-chat-open');
-                    });
-                    header.prepend(btn);
-                  }
-                }, 300);
+          // Wait for Chat.load() to finish loading contacts
+          const waitForContacts = () => new Promise(resolve => {
+            const check = () => {
+              const list = document.getElementById('contacts-list');
+              if (list && list.children.length > 0) return resolve();
+              setTimeout(check, 100);
+            };
+            setTimeout(check, 300);
+          });
+          await waitForContacts();
+          // Now open the specific chat
+          await Chat.openChatById(user.id);
+          // On mobile: show chat window and add back button
+          if (window.innerWidth <= 768) {
+            const layout = document.querySelector('.chat-layout');
+            if (layout) layout.classList.add('mobile-chat-open');
+            setTimeout(() => {
+              if (typeof Mobile !== 'undefined' && Mobile.addChatBackButton) {
+                Mobile.addChatBackButton();
               }
-            } else {
-              setTimeout(waitAndOpen, 100);
-            }
-          };
-          setTimeout(waitAndOpen, 200);
+            }, 200);
+          }
         });
 
         const friendBtn = viewActions.querySelector('.friend-btn');
