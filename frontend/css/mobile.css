@@ -578,8 +578,8 @@
   .chat-page-active .main-content {
     padding-bottom: 0 !important;
     overflow: hidden !important;
-    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
-    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom)) !important;
+    height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
+    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 10px) !important;
   }
 
   .chat-layout {
@@ -605,8 +605,8 @@
     flex-direction: column !important;
     flex: 1;
     overflow: hidden;
-    /* Constrain height: viewport minus top-nav, bottom-bar, and padding */
-    max-height: calc(100vh - 56px - var(--mobile-bar-h) - var(--mobile-safe-bottom) - 24px) !important;
+    height: 100% !important;
+    max-height: 100% !important;
   }
   .chat-layout.mobile-chat-open .chat-messages,
   .chat-layout.mobile-chat-open #personal-chat-messages {
@@ -616,7 +616,10 @@
   }
   .chat-layout.mobile-chat-open #personal-chat-input-bar {
     flex-shrink: 0;
-    padding: 6px 10px !important;
+    padding: 8px 10px !important;
+    margin-bottom: 0 !important;
+    position: relative;
+    z-index: 5;
   }
 
   /* Contact items — iOS list style */
