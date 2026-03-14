@@ -89,10 +89,9 @@ body.announcements-mode .mobile-bottom-bar span {
 body.announcements-mode .mobile-bottom-bar .mobile-tab.active span {
   color: #fff !important;
 }
-/* Profile avatar in top nav — bright border + glow so it's visible */
-body.announcements-mode .profile-mini .avatar-mini {
-  border: 2px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+/* Bottom nav profile icon (SVG) — make it visible in light theme */
+body.announcements-mode .mobile-bottom-bar .mobile-tab svg {
+  stroke: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Section header transparent in announcements */
