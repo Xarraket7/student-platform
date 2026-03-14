@@ -765,6 +765,19 @@
   [data-theme="light"] .news-modal-actions {
     border-top-color: rgba(0, 0, 0, 0.08);
   }
+  [data-theme="light"] .news-modal-title {
+    color: #1a1a2e !important;
+  }
+  [data-theme="light"] .news-modal-content {
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+  [data-theme="light"] .news-modal-actions .post-action {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+  [data-theme="light"] .news-modal-actions .post-action img {
+    filter: brightness(0) !important;
+    opacity: 0.5;
+  }
 
   /* Community banner */
   .community-banner {
