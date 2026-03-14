@@ -283,9 +283,8 @@
   }
   .mobile-tab-icon {
     width: 24px; height: 24px;
-    opacity: 0.45;
+    opacity: 0.55;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: brightness(0) invert(1);
   }
   /* SVG profile icon — no filter needed */
   .mobile-tab-svg {
@@ -307,7 +306,6 @@
   .mobile-tab.active { color: var(--accent); }
   .mobile-tab.active .mobile-tab-icon {
     opacity: 1;
-    filter: brightness(0) invert(1);
     transform: translateY(-1px);
   }
   .mobile-tab.active .mobile-tab-svg {
