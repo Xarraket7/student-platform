@@ -494,19 +494,20 @@ const Communities = {
       volunteers: ['Gr987876oup 3.png', 'imag970978e 4.png', 'image 0898095.png', 'ima8890ge 6.png', 'image 89070977.png', 'imag98079e 8.png']
     };
 
-    // Try loading from API first
+    // Start with hardcoded photos for original communities
     let photos = [];
+    if (galleryMap[this.current.slug]) {
+      photos = galleryMap[this.current.slug].map(p => ({ src: `assets/photos/${p}`, id: null }));
+    }
+
+    // Add API-uploaded photos on top (newest first)
     try {
       const apiGallery = await API.get(`/communities/${this.current.slug}/gallery`);
       if (apiGallery && apiGallery.length > 0) {
-        photos = apiGallery.map(g => ({ src: `assets/photos/${g.image}`, id: g.id }));
+        const apiPhotos = apiGallery.map(g => ({ src: `assets/photos/${g.image}`, id: g.id }));
+        photos = [...apiPhotos, ...photos];
       }
     } catch (e) {}
-
-    // Fallback to hardcoded if API returned nothing
-    if (photos.length === 0 && galleryMap[this.current.slug]) {
-      photos = galleryMap[this.current.slug].map(p => ({ src: `assets/photos/${p}`, id: null }));
-    }
 
     if (photos.length === 0) {
       container.innerHTML = '<div class="gallery-empty">Тут будут отображаться фото этого сообщества 📷</div>';
