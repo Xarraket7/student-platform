@@ -479,12 +479,12 @@
     fill: none;
     stroke-width: 1.8;
   }
-  /* Light theme: make icon bright/white so it's visible */
+  /* Light theme: subtle icon, no bg highlight */
   [data-theme="light"] .mobile-theme-btn {
-    background: rgba(255,255,255,0.2);
+    background: transparent;
   }
   [data-theme="light"] .mobile-theme-btn svg {
-    stroke: #fff;
+    stroke: rgba(255,255,255,0.7);
   }
 
   /* News carousel label */
