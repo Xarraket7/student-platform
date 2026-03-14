@@ -86,12 +86,11 @@ body.announcements-mode .mobile-bottom-bar {
 body.announcements-mode .mobile-bottom-bar span {
   color: rgba(255, 255, 255, 0.7) !important;
 }
-body.announcements-mode .mobile-bottom-bar .nav-item.active span {
+body.announcements-mode .mobile-bottom-bar .mobile-tab.active span {
   color: #fff !important;
 }
-body.announcements-mode .mobile-bottom-bar .nav-item img,
-body.announcements-mode .mobile-bottom-bar .nav-item svg {
-  filter: brightness(2) !important;
+body.announcements-mode .mobile-bottom-bar .mobile-tab img.mobile-tab-icon {
+  filter: brightness(3) !important;
 }
 /* Profile icon visible */
 body.announcements-mode .profile-mini img {
