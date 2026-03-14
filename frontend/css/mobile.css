@@ -479,12 +479,12 @@
     fill: none;
     stroke-width: 1.8;
   }
-  /* Light theme: show moon icon instead */
+  /* Light theme: make icon bright/white so it's visible */
   [data-theme="light"] .mobile-theme-btn {
-    background: rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.2);
   }
   [data-theme="light"] .mobile-theme-btn svg {
-    stroke: rgba(0,0,0,0.5);
+    stroke: #fff;
   }
 
   /* News carousel label */
