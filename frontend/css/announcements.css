@@ -76,21 +76,21 @@ body.announcements-mode .mobile-theme-btn svg,
 body.announcements-mode .mobile-friends-btn svg {
   stroke: rgba(255, 255, 255, 0.8) !important;
 }
-/* Bottom nav: white text + icons in announcements mode */
-body.announcements-mode .mobile-bottom-bar {
+/* Light theme only: fix bottom nav in announcements mode */
+[data-theme="light"] body.announcements-mode .mobile-bottom-bar,
+body.announcements-mode[data-theme="light"] .mobile-bottom-bar {
   background: rgba(0, 0, 0, 0.4) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
-body.announcements-mode .mobile-bottom-bar span {
+[data-theme="light"] body.announcements-mode .mobile-bottom-bar span {
   color: rgba(255, 255, 255, 0.7) !important;
 }
-body.announcements-mode .mobile-bottom-bar .mobile-tab.active span {
+[data-theme="light"] body.announcements-mode .mobile-bottom-bar .mobile-tab.active span {
   color: #fff !important;
 }
-/* Bottom nav profile icon (SVG) — make it visible in light theme */
-body.announcements-mode .mobile-bottom-bar .mobile-tab svg {
+[data-theme="light"] body.announcements-mode .mobile-bottom-bar .mobile-tab svg {
   stroke: rgba(255, 255, 255, 0.7) !important;
 }
 
