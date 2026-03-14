@@ -266,13 +266,21 @@ const Feed = {
 
   closeComments() {
     if (this.commentsPopup) {
-      gsap.to(this.commentsPopup, {
-        opacity: 0, scale: 0.95, duration: 0.15,
-        onComplete: () => {
-          this.commentsPopup?.remove();
-          this.commentsPopup = null;
-        }
-      });
+      const popup = this.commentsPopup;
+      if (popup.classList.contains('comments-popup-mobile')) {
+        const sheet = popup.querySelector('.comments-popup-sheet');
+        gsap.to(popup.querySelector('.comments-popup-overlay'), { opacity: 0, duration: 0.2 });
+        gsap.to(sheet, {
+          y: '100%', duration: 0.25, ease: 'power2.in',
+          onComplete: () => { popup.remove(); }
+        });
+      } else {
+        gsap.to(popup, {
+          opacity: 0, scale: 0.95, duration: 0.15,
+          onComplete: () => { popup.remove(); }
+        });
+      }
+      this.commentsPopup = null;
     }
   },
 
@@ -280,58 +288,88 @@ const Feed = {
     if (!Auth.isLoggedIn()) return showToast('Войдите, чтобы комментировать');
     this.closeComments();
 
+    const isMobile = window.innerWidth <= 768;
+
     const popup = document.createElement('div');
-    popup.className = 'comments-popup';
+    popup.className = 'comments-popup' + (isMobile ? ' comments-popup-mobile' : '');
     popup.dataset.postId = postId;
-    popup.innerHTML = `
-      <div class="comments-popup-header">
-        <span>Комментарии</span>
-        <button class="comments-popup-close">&times;</button>
-      </div>
-      <div class="comments-popup-list"></div>
-      <div class="comments-popup-input">
-        <input type="text" placeholder="Написать..." class="comments-popup-field">
-        <button class="comments-popup-send">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </div>
-    `;
+
+    if (isMobile) {
+      // Mobile: bottom sheet with overlay
+      popup.innerHTML = `
+        <div class="comments-popup-overlay"></div>
+        <div class="comments-popup-sheet">
+          <div class="comments-popup-handle"></div>
+          <div class="comments-popup-header">
+            <span>Комментарии</span>
+            <button class="comments-popup-close">&times;</button>
+          </div>
+          <div class="comments-popup-list"></div>
+          <div class="comments-popup-input">
+            <input type="text" placeholder="Написать..." class="comments-popup-field">
+            <button class="comments-popup-send">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      popup.innerHTML = `
+        <div class="comments-popup-header">
+          <span>Комментарии</span>
+          <button class="comments-popup-close">&times;</button>
+        </div>
+        <div class="comments-popup-list"></div>
+        <div class="comments-popup-input">
+          <input type="text" placeholder="Написать..." class="comments-popup-field">
+          <button class="comments-popup-send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      `;
+    }
 
     document.body.appendChild(popup);
     this.commentsPopup = popup;
 
-    // Position near the comment button
-    const zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
-    const btnRect = anchorEl.getBoundingClientRect();
-    const pw = 340;                       // popup CSS width
-    const ph = 420;                       // popup CSS max-height
-    const bLeft = btnRect.left / zoom;
-    const bTop = btnRect.top / zoom;
-    const bBottom = btnRect.bottom / zoom;
-    const bCenterX = bLeft + (btnRect.width / zoom) / 2;
-    const vw = window.innerWidth / zoom;
-    const vh = window.innerHeight / zoom;
+    if (isMobile) {
+      // Mobile: animate bottom sheet up
+      const sheet = popup.querySelector('.comments-popup-sheet');
+      gsap.fromTo(popup.querySelector('.comments-popup-overlay'),
+        { opacity: 0 }, { opacity: 1, duration: 0.25 });
+      gsap.fromTo(sheet,
+        { y: '100%' }, { y: '0%', duration: 0.3, ease: 'power2.out' });
 
-    // Place popup above-right of the button, as if coming out from the icon
-    const bRight = bLeft + (btnRect.width / zoom);
-    let left = bRight + 8;
-    let top = bTop - ph + 20;
+      // Close on overlay tap
+      popup.querySelector('.comments-popup-overlay').addEventListener('click', () => this.closeComments());
+    } else {
+      // Desktop: Position near the comment button
+      const zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+      const btnRect = anchorEl.getBoundingClientRect();
+      const pw = 340;
+      const ph = 420;
+      const bLeft = btnRect.left / zoom;
+      const bTop = btnRect.top / zoom;
+      const vw = window.innerWidth / zoom;
+      const vh = window.innerHeight / zoom;
 
-    // Keep within viewport horizontally
-    if (left < 10) left = 10;
-    if (left + pw > vw - 10) left = vw - pw - 10;
+      const bRight = bLeft + (btnRect.width / zoom);
+      let left = bRight + 8;
+      let top = bTop - ph + 20;
 
-    // Keep within viewport vertically
-    if (top + ph > vh - 10) top = vh - ph - 10;
-    if (top < 10) top = 10;
+      if (left < 10) left = 10;
+      if (left + pw > vw - 10) left = vw - pw - 10;
+      if (top + ph > vh - 10) top = vh - ph - 10;
+      if (top < 10) top = 10;
 
-    popup.style.left = left + 'px';
-    popup.style.top = top + 'px';
+      popup.style.left = left + 'px';
+      popup.style.top = top + 'px';
 
-    gsap.fromTo(popup,
-      { opacity: 0, scale: 0.95, y: 6 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: 'back.out(2)' }
-    );
+      gsap.fromTo(popup,
+        { opacity: 0, scale: 0.95, y: 6 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: 'back.out(2)' }
+      );
+    }
 
     // Load comments
     try {
@@ -390,16 +428,18 @@ const Feed = {
     sendBtn.addEventListener('click', sendComment);
     inputField.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendComment(); });
 
-    // Close on click outside
-    setTimeout(() => {
-      const closeHandler = (e) => {
-        if (!popup.contains(e.target) && !anchorEl.contains(e.target)) {
-          this.closeComments();
-          document.removeEventListener('click', closeHandler);
-        }
-      };
-      document.addEventListener('click', closeHandler);
-    }, 10);
+    // Close on click outside (desktop only)
+    if (!isMobile) {
+      setTimeout(() => {
+        const closeHandler = (e) => {
+          if (!popup.contains(e.target) && !anchorEl.contains(e.target)) {
+            this.closeComments();
+            document.removeEventListener('click', closeHandler);
+          }
+        };
+        document.addEventListener('click', closeHandler);
+      }, 100);
+    }
   },
 
   async loadRightSidebar() {

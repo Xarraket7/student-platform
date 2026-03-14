@@ -316,6 +316,34 @@
 [data-theme="light"] .feed-posts-title {
   color: #fff !important;
 }
+/* Light theme: keep post actions (like/comment) white on dark banner overlay */
+[data-theme="light"] .post-action {
+  color: rgba(255,255,255,0.7) !important;
+}
+[data-theme="light"] .post-action:hover {
+  color: #fff !important;
+}
+[data-theme="light"] .post-action img {
+  filter: brightness(0) invert(1) !important;
+}
+[data-theme="light"] .post-action.liked {
+  color: var(--like-color) !important;
+}
+[data-theme="light"] .post-action.liked img {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(79%) saturate(2700%) hue-rotate(334deg) brightness(100%) contrast(101%) !important;
+}
+[data-theme="light"] .post-content {
+  color: rgba(255,255,255,0.9) !important;
+}
+[data-theme="light"] .post-author-name {
+  color: #fff !important;
+}
+[data-theme="light"] .post-author-role {
+  color: rgba(255,255,255,0.6) !important;
+}
+[data-theme="light"] .post-actions {
+  border-top-color: rgba(255,255,255,0.15) !important;
+}
 
 /* Right Sidebar */
 .right-events, .right-announcements {
