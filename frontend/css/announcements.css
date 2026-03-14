@@ -89,13 +89,10 @@ body.announcements-mode .mobile-bottom-bar span {
 body.announcements-mode .mobile-bottom-bar .mobile-tab.active span {
   color: #fff !important;
 }
-body.announcements-mode .mobile-bottom-bar .mobile-tab img.mobile-tab-icon {
-  filter: brightness(3) !important;
-}
-/* Profile icon visible */
-body.announcements-mode .profile-mini img {
-  opacity: 1 !important;
-  filter: brightness(1.2) !important;
+/* Profile avatar in top nav — bright border + glow so it's visible */
+body.announcements-mode .profile-mini .avatar-mini {
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Section header transparent in announcements */
