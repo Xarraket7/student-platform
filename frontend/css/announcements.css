@@ -76,6 +76,28 @@ body.announcements-mode .mobile-theme-btn svg,
 body.announcements-mode .mobile-friends-btn svg {
   stroke: rgba(255, 255, 255, 0.8) !important;
 }
+/* Bottom nav: white text + icons in announcements mode */
+body.announcements-mode .mobile-bottom-bar {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+body.announcements-mode .mobile-bottom-bar span {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+body.announcements-mode .mobile-bottom-bar .nav-item.active span {
+  color: #fff !important;
+}
+body.announcements-mode .mobile-bottom-bar .nav-item img,
+body.announcements-mode .mobile-bottom-bar .nav-item svg {
+  filter: brightness(2) !important;
+}
+/* Profile icon visible */
+body.announcements-mode .profile-mini img {
+  opacity: 1 !important;
+  filter: brightness(1.2) !important;
+}
 
 /* Section header transparent in announcements */
 body.announcements-mode .section-header.glass-panel {
