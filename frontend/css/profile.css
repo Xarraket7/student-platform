@@ -186,6 +186,15 @@
   border-radius: 50%;
 }
 
+/* Light theme: white text on dark glass profile */
+[data-theme="light"] .profile-left h2 { color: #fff !important; }
+[data-theme="light"] .profile-role { color: var(--accent) !important; }
+[data-theme="light"] .profile-group { color: rgba(255,255,255,0.5) !important; }
+[data-theme="light"] .profile-right h3 { color: #fff !important; }
+[data-theme="light"] .profile-field label { color: rgba(255,255,255,0.5) !important; }
+[data-theme="light"] .profile-input { color: #fff !important; }
+[data-theme="light"] #page-profile .section-header h2 { color: #fff !important; }
+
 @media (max-width: 768px) {
   .profile-layout { flex-direction: column; }
   .profile-left { width: 100%; }
