@@ -10,7 +10,7 @@
     "birthday": null,
     "group_name": null,
     "google_id": null,
-    "is_online": true,
+    "is_online": false,
     "friends": [
       2,
       3,
@@ -34,7 +34,7 @@
     "birthday": "2006-05-12",
     "group_name": "ИС22-4Б",
     "google_id": null,
-    "is_online": false,
+    "is_online": true,
     "friends": [
       3,
       4,
