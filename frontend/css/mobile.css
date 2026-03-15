@@ -1286,27 +1286,28 @@
   /* === Guest warning — mobile layout === */
   .guest-warning {
     margin: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    flex: 1 !important;
   }
   .guest-warning-content {
-    position: relative !important;
+    position: absolute !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    top: auto !important;
+    top: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-end !important;
     padding: 0 !important;
-    overflow: visible !important;
-    height: auto !important;
-    min-height: 0 !important;
+    overflow: hidden !important;
   }
   .guest-warning-img {
-    width: 90vw !important;
-    max-width: 420px !important;
-    margin: 0 auto !important;
+    width: 110vw !important;
+    max-width: none !important;
+    max-height: 75% !important;
+    margin: 0 !important;
+    margin-left: -15vw !important;
     flex-shrink: 0 !important;
     object-position: center bottom !important;
     object-fit: contain !important;
@@ -1314,40 +1315,40 @@
   }
   .guest-overlay {
     position: absolute !important;
-    top: 0 !important;
-    right: 4vw !important;
+    top: 8px !important;
+    right: 5vw !important;
     left: auto !important;
     bottom: auto !important;
     width: auto !important;
-    max-width: 52vw !important;
-    min-width: 160px !important;
+    max-width: 48vw !important;
+    min-width: 150px !important;
     margin: 0 !important;
-    padding: 12px 16px !important;
+    padding: 12px 14px !important;
     border-radius: 16px !important;
     box-sizing: border-box !important;
     z-index: 2 !important;
   }
   .guest-overlay p {
-    font-size: 12px !important;
-    margin-bottom: 10px !important;
+    font-size: 11px !important;
+    margin-bottom: 8px !important;
     line-height: 1.35 !important;
     text-align: center !important;
   }
   .guest-overlay .guest-login-btn {
-    padding: 8px 20px !important;
-    font-size: 13px !important;
+    padding: 8px 16px !important;
+    font-size: 12px !important;
   }
   .guest-overlay::after {
     bottom: -14px !important;
     left: auto !important;
-    right: 30px !important;
+    right: 24px !important;
     display: block !important;
     transform: scaleX(-1) !important;
   }
   .guest-overlay::before {
     bottom: -16px !important;
     left: auto !important;
-    right: 29px !important;
+    right: 23px !important;
     display: block !important;
     transform: scaleX(-1) !important;
   }
