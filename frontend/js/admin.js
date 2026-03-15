@@ -101,7 +101,6 @@ const Admin = {
       e.preventDefault();
       const title = document.getElementById('admin-comm-title').value;
       const slug = document.getElementById('admin-comm-slug').value;
-      const desc = document.getElementById('admin-comm-desc').value;
       const iconFile = document.getElementById('admin-comm-icon').files[0];
       const avatarFile = document.getElementById('admin-comm-avatar').files[0];
       const bgFile = document.getElementById('admin-comm-bg').files[0];
@@ -111,7 +110,6 @@ const Admin = {
       const formData = new FormData();
       formData.append('title', title);
       formData.append('slug', slug);
-      if (desc) formData.append('description', desc);
       if (iconFile) formData.append('icon', iconFile);
       if (avatarFile) formData.append('avatar', avatarFile);
       if (bgFile) formData.append('background', bgFile);
@@ -121,6 +119,7 @@ const Admin = {
         showToast('Сообщество создано');
         document.getElementById('admin-community-form').reset();
         this.loadCommunitiesList();
+        this.refreshCommunitySelect();
       } catch (e) { showToast(e.message); }
     };
 
@@ -155,6 +154,17 @@ const Admin = {
 
     this.loadCommunitiesList();
     this.setupSlugSuggestions();
+  },
+
+  async refreshCommunitySelect() {
+    try {
+      const communities = await API.get('/communities');
+      const select = document.getElementById('admin-post-community');
+      if (select) {
+        select.innerHTML = '<option value="">Выберите сообщество</option>' +
+          communities.map(c => `<option value="${c.id}">${c.title}</option>`).join('');
+      }
+    } catch (e) {}
   },
 
   async setupSlugSuggestions() {
