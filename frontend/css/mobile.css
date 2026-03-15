@@ -1366,6 +1366,11 @@
     min-height: calc(100vh - 120px) !important;
     min-height: calc(100dvh - 120px) !important;
   }
+  #page-chat .guest-warning-img,
+  #page-profile .guest-warning-img {
+    width: 140% !important;
+    margin-left: -10% !important;
+  }
 }
 
 /* ========== PHONE (≤480px) ========== */
