@@ -1304,8 +1304,8 @@
     min-height: 0 !important;
   }
   .guest-warning-img {
-    width: 75vw !important;
-    max-width: 340px !important;
+    width: 90vw !important;
+    max-width: 420px !important;
     margin: 0 auto !important;
     flex-shrink: 0 !important;
     object-position: center bottom !important;
