@@ -1322,4 +1322,48 @@
 
   .event-card { padding: 14px; }
   .community-card-name { font-size: 18px; }
+
+  /* === Guest warning — mobile layout === */
+  .guest-warning {
+    margin: 0 !important;
+  }
+  .guest-warning-content {
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 0 16px !important;
+  }
+  .guest-warning-img {
+    width: 260px !important;
+    max-width: 70vw !important;
+    margin: 0 auto;
+  }
+  .guest-overlay {
+    width: 85% !important;
+    max-width: 320px !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    position: absolute !important;
+    bottom: auto !important;
+    top: 10px !important;
+    right: 10px !important;
+    left: auto !important;
+    padding: 16px 20px !important;
+    border-radius: 18px !important;
+  }
+  .guest-overlay p {
+    font-size: 14px !important;
+    margin-bottom: 14px !important;
+  }
+  .guest-overlay::after,
+  .guest-overlay::before {
+    display: none !important;
+  }
+  #page-chat .guest-overlay,
+  #page-announcements .guest-overlay {
+    margin-bottom: 0 !important;
+  }
 }
