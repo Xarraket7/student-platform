@@ -158,11 +158,20 @@ const Chat = {
 
   renderMessage(msg) {
     const isOwn = msg.sender_id === Auth.user?.id;
+    const isImage = msg.image && /\.(jpg|jpeg|png|gif|webp|bmp)$/i.test(msg.image);
+    let contentHTML = '';
+    if (isImage) {
+      contentHTML = `<div class="chat-msg-image"><img src="${msg.image}" alt="${msg.text || 'фото'}" style="max-width:250px;border-radius:8px;"></div>`;
+    } else if (msg.image) {
+      contentHTML = `<div class="chat-msg-file"><a href="${msg.image}" target="_blank" download>📎 ${msg.text}</a></div>`;
+    } else {
+      contentHTML = `<div class="chat-msg-text">${msg.text}</div>`;
+    }
     return `
       <div class="chat-message ${isOwn ? 'own' : ''}">
         <img src="assets/avatars/${msg.sender_avatar || 'Admin.png'}" alt="" class="chat-msg-avatar">
         <div class="chat-msg-bubble">
-          <div class="chat-msg-text">${msg.text}</div>
+          ${contentHTML}
           <div class="chat-msg-time">${formatTime(msg.created_at)}</div>
         </div>
       </div>
@@ -255,31 +264,33 @@ const Chat = {
       fileInput.click();
     });
 
-    fileInput.addEventListener('change', (e) => {
+    fileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file || !this.currentContact) return;
-
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const imgSrc = event.target.result;
-        // Show image preview in chat as own message
-        const container = document.getElementById('personal-chat-messages');
-        const msgHtml = `
-          <div class="chat-message own">
-            <img src="assets/avatars/${Auth.user?.avatar || 'Admin.png'}" alt="" class="chat-msg-avatar">
-            <div class="chat-msg-bubble">
-              <div class="chat-msg-image"><img src="${imgSrc}" alt="фото" style="max-width:250px;border-radius:8px;"></div>
-              <div class="chat-msg-time">${new Date().toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'})}</div>
-            </div>
-          </div>
-        `;
-        container.insertAdjacentHTML('beforeend', msgHtml);
-        const newMsg = container.lastElementChild;
-        gsap.fromTo(newMsg, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 });
-        container.scrollTop = container.scrollHeight;
-      };
-      reader.readAsDataURL(file);
       fileInput.value = '';
+
+      try {
+        const formData = new FormData();
+        formData.append('files', file);
+        const resp = await fetch('/api/upload', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        });
+        const result = await resp.json();
+        if (!resp.ok) throw new Error(result.error || 'Upload failed');
+
+        const uploaded = result[0];
+        if (window.socketIO) {
+          window.socketIO.emit('message:send', {
+            receiverId: this.currentContact,
+            text: uploaded.originalname,
+            image: uploaded.url
+          });
+        }
+      } catch (err) {
+        showToast(err.message || 'Ошибка загрузки фото');
+      }
     });
   }
 };
