@@ -1331,34 +1331,57 @@
     position: relative !important;
     left: 0 !important;
     right: 0 !important;
-    flex-direction: column-reverse !important;
-    align-items: center !important;
+    bottom: 0 !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-end !important;
     justify-content: flex-start !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
   .guest-warning-img {
-    width: 220px !important;
-    max-width: 60vw !important;
-    margin: 0 auto !important;
+    width: 55vw !important;
+    max-width: 260px !important;
+    margin: 0 !important;
+    margin-left: -10px !important;
     flex-shrink: 0 !important;
+    align-self: flex-end !important;
+    object-position: left bottom !important;
   }
   .guest-overlay {
-    position: relative !important;
-    width: calc(100% - 32px) !important;
-    max-width: none !important;
-    margin: 16px 16px 0 16px !important;
-    padding: 16px 20px !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 8px !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 58vw !important;
+    max-width: 250px !important;
+    margin: 0 !important;
+    padding: 14px 18px !important;
     border-radius: 18px !important;
     box-sizing: border-box !important;
   }
   .guest-overlay p {
-    font-size: 14px !important;
-    margin-bottom: 14px !important;
+    font-size: 13px !important;
+    margin-bottom: 12px !important;
+    line-height: 1.4 !important;
   }
-  .guest-overlay::after,
+  .guest-overlay .guest-login-btn {
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+  }
+  .guest-overlay::after {
+    bottom: -16px !important;
+    left: 20px !important;
+    display: block !important;
+  }
   .guest-overlay::before {
-    display: none !important;
+    bottom: -18px !important;
+    left: 19px !important;
+    display: block !important;
   }
   #page-chat .guest-overlay,
   #page-announcements .guest-overlay {
