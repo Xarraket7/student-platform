@@ -1356,10 +1356,10 @@
   #page-announcements .guest-overlay {
     margin-bottom: 0 !important;
   }
-  #page-chat .guest-warning-img,
-  #page-profile .guest-warning-img {
-    width: 140% !important;
-    margin-left: -10% !important;
+  #page-chat .guest-warning-content .guest-warning-img,
+  #page-profile .guest-warning-content .guest-warning-img {
+    width: 100% !important;
+    margin-left: 0 !important;
   }
 }
 
