@@ -158,7 +158,7 @@ const Chat = {
 
   renderMessage(msg) {
     const isOwn = msg.sender_id === Auth.user?.id;
-    const isImage = msg.image && /\.(jpg|jpeg|png|gif|webp|bmp)$/i.test(msg.image);
+    const isImage = msg.image && (/\.(jpg|jpeg|png|gif|webp|bmp)/i.test(msg.image) || msg.image.includes('cloudinary.com') || msg.image.includes('/uploads/'));
     let contentHTML = '';
     if (isImage) {
       contentHTML = `<div class="chat-msg-image"><img src="${msg.image}" alt="${msg.text || 'фото'}" style="max-width:250px;border-radius:8px;"></div>`;

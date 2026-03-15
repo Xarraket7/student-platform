@@ -452,7 +452,7 @@ const Communities = {
 
   renderChatMessage(msg) {
     const isOwn = msg.sender_id === Auth.user?.id;
-    const isImage = msg.image && /\.(jpg|jpeg|png|gif|webp|bmp)$/i.test(msg.image);
+    const isImage = msg.image && (/\.(jpg|jpeg|png|gif|webp|bmp)/i.test(msg.image) || msg.image.includes('cloudinary.com') || msg.image.includes('/uploads/'));
     const isFile = msg.image && !isImage;
 
     let attachmentHTML = '';
