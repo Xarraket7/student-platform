@@ -183,5 +183,35 @@
     "is_online": false,
     "friends": [],
     "created_at": "2026-03-06T01:54:55.665Z"
+  },
+  {
+    "id": 11,
+    "name": "Test",
+    "email": "test@test.com",
+    "password": "$2a$10$g10S0R9OOzNSmEB9ftdi8eRToNBUqly8cy.E1G8W3Oi.KHelJUHNe",
+    "role": "student",
+    "avatar": "default.png",
+    "age": null,
+    "birthday": null,
+    "group_name": null,
+    "google_id": null,
+    "is_online": false,
+    "friends": [],
+    "created_at": "2026-03-13T19:14:27.074Z"
+  },
+  {
+    "id": 12,
+    "name": "TestUser",
+    "email": "testmob@test.com",
+    "password": "$2a$10$M.isRXteSCOCiKGJXm34W.WJ/DgcyZbx42FMi9pHtYE4yjB4PvVI6",
+    "role": "student",
+    "avatar": "default.png",
+    "age": null,
+    "birthday": null,
+    "group_name": null,
+    "google_id": null,
+    "is_online": false,
+    "friends": [],
+    "created_at": "2026-03-13T19:14:54.914Z"
   }
 ]

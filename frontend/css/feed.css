@@ -204,6 +204,10 @@
   max-width: 55%;
 }
 
+.post-detail-btn {
+  display: none;
+}
+
 .post-actions {
   display: flex;
   align-items: center;
