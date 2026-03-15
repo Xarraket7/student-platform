@@ -1282,46 +1282,6 @@
     margin-top: 10px;
     font-size: 13px;
   }
-}
-
-/* ========== PHONE (≤480px) ========== */
-@media (max-width: 480px) {
-  .main-content {
-    padding: 6px 8px;
-    padding-bottom: calc(var(--mobile-bar-h) + var(--mobile-safe-bottom) + 8px);
-  }
-
-  .top-nav { padding: 6px 10px; min-height: 46px; }
-
-  .feed-community-icons { gap: 6px; }
-
-  .post-banner-content { padding: 12px 14px; }
-  .post-avatar { width: 34px; height: 34px; }
-  .post-author-name { font-size: 14px; }
-  .post-content { font-size: 13px; }
-
-  .section-header h1 { font-size: 18px; }
-
-  .announcement-text h2 { font-size: 18px; }
-
-  .auth-form { padding: 28px 20px !important; }
-  .auth-title { font-size: 26px; }
-
-  .profile-avatar-wrapper { width: 80px; height: 80px; }
-
-  .contact-item { padding: 10px 12px; }
-  .contact-avatar { width: 40px; height: 40px; }
-  .contact-name { font-size: 14px; }
-
-  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  .mobile-tab { min-width: 42px; }
-  .mobile-tab span { font-size: 9px; letter-spacing: 0; }
-  .mobile-tab-icon { width: 22px; height: 22px; }
-  .mobile-tab-svg { width: 22px; height: 22px; }
-
-  .event-card { padding: 14px; }
-  .community-card-name { font-size: 18px; }
 
   /* === Guest warning — mobile layout === */
   .guest-warning {
@@ -1395,4 +1355,44 @@
   #page-announcements .guest-overlay {
     margin-bottom: 0 !important;
   }
+}
+
+/* ========== PHONE (≤480px) ========== */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 6px 8px;
+    padding-bottom: calc(var(--mobile-bar-h) + var(--mobile-safe-bottom) + 8px);
+  }
+
+  .top-nav { padding: 6px 10px; min-height: 46px; }
+
+  .feed-community-icons { gap: 6px; }
+
+  .post-banner-content { padding: 12px 14px; }
+  .post-avatar { width: 34px; height: 34px; }
+  .post-author-name { font-size: 14px; }
+  .post-content { font-size: 13px; }
+
+  .section-header h1 { font-size: 18px; }
+
+  .announcement-text h2 { font-size: 18px; }
+
+  .auth-form { padding: 28px 20px !important; }
+  .auth-title { font-size: 26px; }
+
+  .profile-avatar-wrapper { width: 80px; height: 80px; }
+
+  .contact-item { padding: 10px 12px; }
+  .contact-avatar { width: 40px; height: 40px; }
+  .contact-name { font-size: 14px; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  .mobile-tab { min-width: 42px; }
+  .mobile-tab span { font-size: 9px; letter-spacing: 0; }
+  .mobile-tab-icon { width: 22px; height: 22px; }
+  .mobile-tab-svg { width: 22px; height: 22px; }
+
+  .event-card { padding: 14px; }
+  .community-card-name { font-size: 18px; }
 }
