@@ -1303,12 +1303,11 @@
     overflow: hidden !important;
   }
   .guest-warning-img {
-    width: 220% !important;
+    width: 100% !important;
     max-width: none !important;
     max-height: none !important;
     flex-shrink: 0 !important;
     margin: 0 !important;
-    margin-left: -20% !important;
     margin-top: auto !important;
     object-fit: contain !important;
     z-index: 1 !important;
@@ -1355,11 +1354,6 @@
   #page-chat .guest-overlay,
   #page-announcements .guest-overlay {
     margin-bottom: 0 !important;
-  }
-  #page-chat .guest-warning-content .guest-warning-img,
-  #page-profile .guest-warning-content .guest-warning-img {
-    width: 100% !important;
-    margin-left: 0 !important;
   }
 }
 
