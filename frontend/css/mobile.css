@@ -1303,11 +1303,11 @@
     overflow: hidden !important;
   }
   .guest-warning-img {
-    width: 110vw !important;
+    width: 130vw !important;
     max-width: none !important;
-    max-height: 75% !important;
+    max-height: 85% !important;
     margin: 0 !important;
-    margin-left: -15vw !important;
+    margin-left: -25vw !important;
     flex-shrink: 0 !important;
     object-position: center bottom !important;
     object-fit: contain !important;
