@@ -6,10 +6,19 @@ const Chat = {
 
   async load() {
     if (!Auth.isLoggedIn()) return;
-    this.loadContacts();
+    const savedContact = this.currentContact;
+    await this.loadContacts();
     this.initPhotoButton();
     this.initLightbox();
     this.initContactSearch();
+    // Reopen last chat if returning to the page
+    if (savedContact) {
+      const contactEl = document.querySelector(`.contact-item[data-user-id="${savedContact}"]`);
+      if (contactEl) {
+        contactEl.classList.add('active');
+        this.openChat(savedContact, contactEl);
+      }
+    }
   },
 
   initContactSearch() {
