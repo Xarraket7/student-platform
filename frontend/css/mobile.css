@@ -1303,14 +1303,14 @@
     overflow: hidden !important;
   }
   .guest-warning-img {
-    width: 130vw !important;
+    width: 100% !important;
     max-width: none !important;
-    max-height: 85% !important;
+    max-height: none !important;
+    flex: 1 !important;
+    min-height: 0 !important;
     margin: 0 !important;
-    margin-left: -25vw !important;
-    flex-shrink: 0 !important;
-    object-position: center bottom !important;
-    object-fit: contain !important;
+    object-position: 35% bottom !important;
+    object-fit: cover !important;
     z-index: 1 !important;
   }
   .guest-overlay {
