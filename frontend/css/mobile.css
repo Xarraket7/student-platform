@@ -1356,16 +1356,6 @@
   #page-announcements .guest-overlay {
     margin-bottom: 0 !important;
   }
-  /* Let guest warning overflow on chat/announcements pages */
-  .chat-page-active .main-content:has(.guest-warning) {
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-  }
-  #page-chat .guest-warning {
-    min-height: calc(100vh - 120px) !important;
-    min-height: calc(100dvh - 120px) !important;
-  }
   #page-chat .guest-warning-img,
   #page-profile .guest-warning-img {
     width: 140% !important;
