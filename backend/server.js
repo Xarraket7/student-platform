@@ -7,22 +7,43 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const { v2: cloudinary } = require('cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const store = require('./data/store');
 const { verifyToken, SECRET } = require('./middleware/auth');
 
-// Ensure uploads directory exists
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Ensure local uploads directory exists (fallback)
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!require('fs').existsSync(uploadsDir)) {
   require('fs').mkdirSync(uploadsDir, { recursive: true });
 }
 
-// Chat file upload config
-const chatStorage = multer.diskStorage({
+// Use Cloudinary if configured, otherwise local disk
+const useCloudinary = !!(process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY);
+
+const cloudinaryStorage = useCloudinary ? new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'student-platform',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'pdf', 'doc', 'docx', 'txt'],
+    resource_type: 'auto'
+  }
+}) : null;
+
+const localStorage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadsDir),
   filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
+
 const chatUpload = multer({
-  storage: chatStorage,
+  storage: useCloudinary ? cloudinaryStorage : localStorage,
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('video/')) {
       cb(new Error('Видео файлы не разрешены'), false);
@@ -81,7 +102,7 @@ app.post('/api/upload', (req, res) => {
       originalname: f.originalname,
       mimetype: f.mimetype,
       size: f.size,
-      url: '/uploads/' + f.filename
+      url: useCloudinary ? f.path : '/uploads/' + f.filename
     }));
     res.json(uploaded);
   });
