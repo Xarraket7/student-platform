@@ -495,13 +495,15 @@ const Communities = {
     if (!this.current) return;
     const container = document.getElementById('community-gallery');
 
-    // Built-in photos for original communities
+    // Built-in photos for original communities (minus ones hidden via admin panel)
     const galleryMap = window.STATIC_GALLERY;
 
-    // Start with hardcoded photos for original communities
     let photos = [];
     if (galleryMap[this.current.slug]) {
-      photos = galleryMap[this.current.slug].map(p => ({ src: `assets/photos/${p}`, id: null }));
+      const hidden = this.current.hidden_static || [];
+      photos = galleryMap[this.current.slug]
+        .filter(p => !hidden.includes(p))
+        .map(p => ({ src: `assets/photos/${p}`, id: null }));
     }
 
     // Add API-uploaded photos on top (newest first)

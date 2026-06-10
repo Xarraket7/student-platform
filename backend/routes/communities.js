@@ -142,6 +142,23 @@ router.delete('/:slug/gallery/:photoId', verifyToken, requireAdmin, (req, res) =
   }
 });
 
+// Hide a built-in gallery photo (admin only) — built-ins live in frontend code,
+// so deletion is stored as a hidden list on the community
+router.post('/:slug/gallery/hide-static', verifyToken, requireAdmin, (req, res) => {
+  try {
+    const community = store.findOne('communities', c => c.slug === req.params.slug);
+    if (!community) return res.status(404).json({ error: 'Сообщество не найдено' });
+    const image = req.body.image;
+    if (!image) return res.status(400).json({ error: 'Не указано фото' });
+    const hidden = community.hidden_static || [];
+    if (!hidden.includes(image)) hidden.push(image);
+    const updated = store.update('communities', community.id, { hidden_static: hidden });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Update community (admin only)
 router.put('/:id', verifyToken, requireAdmin, upload.fields([
   { name: 'icon', maxCount: 1 },

@@ -367,8 +367,12 @@ const Admin = {
 
     try {
       const gallery = await API.get(`/communities/${slug}/gallery`);
-      // Built-in photos of original communities (not deletable, defined in communities.js)
-      const staticPhotos = (window.STATIC_GALLERY && window.STATIC_GALLERY[slug]) || [];
+      // Built-in photos of original communities (defined in communities.js),
+      // minus the ones already hidden via this panel
+      const community = await API.get(`/communities/${slug}`);
+      const hidden = community.hidden_static || [];
+      const staticPhotos = ((window.STATIC_GALLERY && window.STATIC_GALLERY[slug]) || [])
+        .filter(p => !hidden.includes(p));
 
       if (gallery.length === 0 && staticPhotos.length === 0) {
         preview.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px;">Нет фото в галерее</div>';
@@ -382,8 +386,9 @@ const Admin = {
           <button class="admin-gallery-delete" data-id="${g.id}" data-slug="${slug}">&times;</button>
         </div>
       `).join('') + staticPhotos.map(p => `
-        <div class="admin-gallery-item" title="Встроенное фото — удалить нельзя">
+        <div class="admin-gallery-item">
           <img src="assets/photos/${p}" alt="">
+          <button class="admin-gallery-delete admin-gallery-hide" data-image="${p}" data-slug="${slug}">&times;</button>
         </div>
       `).join('');
 
@@ -392,7 +397,12 @@ const Admin = {
       preview.querySelectorAll('.admin-gallery-delete').forEach(btn => {
         btn.addEventListener('click', async () => {
           try {
-            await API.delete(`/communities/${btn.dataset.slug}/gallery/${btn.dataset.id}`);
+            if (btn.dataset.image) {
+              // Built-in photo — hide it on the server
+              await API.post(`/communities/${btn.dataset.slug}/gallery/hide-static`, { image: btn.dataset.image });
+            } else {
+              await API.delete(`/communities/${btn.dataset.slug}/gallery/${btn.dataset.id}`);
+            }
             showToast('Фото удалено');
             this.loadGalleryList();
           } catch (e) { showToast(e.message); }
