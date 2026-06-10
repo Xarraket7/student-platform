@@ -19,14 +19,10 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+  background-image: url('../assets/backgrounds/auth/auth-bg.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  transition: opacity 1.5s ease;
 }
-.auth-bg.active { opacity: 1; }
-.auth-bg-1 { background-image: url('../assets/backgrounds/auth/microsoft-opaline-3840x2160-24928.jpg'); }
-.auth-bg-2 { background-image: url('../assets/backgrounds/auth/microsoft-opaline-3840x2160-24935.jpg'); }
 
 .auth-container {
   position: relative;

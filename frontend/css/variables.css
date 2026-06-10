@@ -60,7 +60,7 @@
   --glass-blur: blur(12px);
   --glass-blur-strong: blur(14px);
 
-  --bg-page: url('../assets/backgrounds/main/ГЛАВ СТРАНИЦА ТЕМН.png');
+  --bg-page: url('../assets/backgrounds/main/ГЛАВ СТРАНИЦА ТЕМН.jpg');
 
   --btn-bg: rgba(255, 255, 255, 0.03);
   --btn-bg-hover: rgba(255, 255, 255, 0.06);
@@ -97,7 +97,7 @@
   --glass-blur: blur(20px);
   --glass-blur-strong: blur(26px);
 
-  --bg-page: url('../assets/backgrounds/main/ГЛАВ СТРАНИЦА СВЕТ.png');
+  --bg-page: url('../assets/backgrounds/main/ГЛАВ СТРАНИЦА СВЕТ.jpg');
 
   --btn-bg: rgba(255, 255, 255, 0.08);
   --btn-bg-hover: rgba(255, 255, 255, 0.15);

@@ -42,10 +42,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(verifyToken);
 
-// Static files
-app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Static files (cache images/fonts in browser to speed up repeat visits)
+app.use('/assets', express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '7d' }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: '7d' }));
+app.use(express.static(path.join(__dirname, '../frontend'), { maxAge: '1h', index: false }));
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));

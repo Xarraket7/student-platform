@@ -1,12 +1,8 @@
 // Auth Manager
 const Auth = {
   user: null,
-  bgInterval: null,
 
   init() {
-    // Auth background slider (4-second interval)
-    this.setupBgSlider();
-
     // Login
     document.getElementById('login-btn').addEventListener('click', () => this.login());
     document.getElementById('register-btn').addEventListener('click', () => this.register());
@@ -49,30 +45,6 @@ const Auth = {
     document.getElementById('login-password').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') this.login();
     });
-  },
-
-  setupBgSlider() {
-    let currentBg = 1;
-    this.bgInterval = setInterval(() => {
-      const bg1 = document.querySelector('.auth-bg-1');
-      const bg2 = document.querySelector('.auth-bg-2');
-      if (currentBg === 1) {
-        bg1.classList.remove('active');
-        bg2.classList.add('active');
-        currentBg = 2;
-      } else {
-        bg2.classList.remove('active');
-        bg1.classList.add('active');
-        currentBg = 1;
-      }
-    }, 4000);
-  },
-
-  stopBgSlider() {
-    if (this.bgInterval) {
-      clearInterval(this.bgInterval);
-      this.bgInterval = null;
-    }
   },
 
   initGoogleLogin() {
@@ -224,7 +196,6 @@ const Auth = {
   },
 
   onLogin() {
-    this.stopBgSlider();
     document.getElementById('auth-page').style.display = 'none';
     document.getElementById('app').style.display = 'flex';
     this.updateUI();
@@ -239,11 +210,9 @@ const Auth = {
   showAuthPage() {
     document.getElementById('app').style.display = 'none';
     document.getElementById('auth-page').style.display = 'flex';
-    this.setupBgSlider();
   },
 
   showApp() {
-    this.stopBgSlider();
     document.getElementById('auth-page').style.display = 'none';
     document.getElementById('app').style.display = 'flex';
   },
