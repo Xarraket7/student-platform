@@ -1,4 +1,12 @@
 // Communities Page
+
+// Built-in gallery photos of the original communities (also shown in admin panel)
+window.STATIC_GALLERY = {
+  sports: ['Group 3.png', 'image 5.png', 'image 4.png', 'image 6.png', 'image 7.png', 'image 8.png'],
+  mobilography: ['342423 3.png', 'image58765 4.png', 'imag70079e 5.png', 'image 787896.png', 'imag87098e 7.png', 'image78098987 8.png'],
+  volunteers: ['Gr987876oup 3.png', 'imag970978e 4.png', 'image 0898095.png', 'ima8890ge 6.png', 'image 89070977.png', 'imag98079e 8.png']
+};
+
 const Communities = {
   list: [],
   current: null,
@@ -487,12 +495,8 @@ const Communities = {
     if (!this.current) return;
     const container = document.getElementById('community-gallery');
 
-    // Hardcoded fallback for original communities
-    const galleryMap = {
-      sports: ['Group 3.png', 'image 5.png', 'image 4.png', 'image 6.png', 'image 7.png', 'image 8.png'],
-      mobilography: ['342423 3.png', 'image58765 4.png', 'imag70079e 5.png', 'image 787896.png', 'imag87098e 7.png', 'image78098987 8.png'],
-      volunteers: ['Gr987876oup 3.png', 'imag970978e 4.png', 'image 0898095.png', 'ima8890ge 6.png', 'image 89070977.png', 'imag98079e 8.png']
-    };
+    // Built-in photos for original communities
+    const galleryMap = window.STATIC_GALLERY;
 
     // Start with hardcoded photos for original communities
     let photos = [];

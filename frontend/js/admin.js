@@ -367,7 +367,10 @@ const Admin = {
 
     try {
       const gallery = await API.get(`/communities/${slug}/gallery`);
-      if (gallery.length === 0) {
+      // Built-in photos of original communities (not deletable, defined in communities.js)
+      const staticPhotos = (window.STATIC_GALLERY && window.STATIC_GALLERY[slug]) || [];
+
+      if (gallery.length === 0 && staticPhotos.length === 0) {
         preview.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px;">Нет фото в галерее</div>';
         list.innerHTML = '';
         return;
@@ -377,6 +380,10 @@ const Admin = {
         <div class="admin-gallery-item">
           <img src="assets/photos/${g.image}" alt="">
           <button class="admin-gallery-delete" data-id="${g.id}" data-slug="${slug}">&times;</button>
+        </div>
+      `).join('') + staticPhotos.map(p => `
+        <div class="admin-gallery-item" title="Встроенное фото — удалить нельзя">
+          <img src="assets/photos/${p}" alt="">
         </div>
       `).join('');
 

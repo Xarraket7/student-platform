@@ -91,6 +91,23 @@ function initSocket() {
     window.socketIO.on('notification:new', (notif) => {
       const dot = document.querySelector('.notification-dot');
       if (dot) dot.style.display = 'block';
+      if (notif && notif.text) showToast('🔔 ' + notif.text);
+      // If dropdown is open, prepend the new notification
+      const dropdown = document.getElementById('notifications-dropdown');
+      if (dropdown && dropdown.style.display !== 'none') {
+        const list = dropdown.querySelector('.notifications-list');
+        const empty = list.querySelector('.notif-empty');
+        if (empty) empty.remove();
+        list.insertAdjacentHTML('afterbegin', `
+          <div class="notif-item">
+            <div class="notif-icon">🔔</div>
+            <div class="notif-content">
+              <div class="notif-text">${notif.text}</div>
+              <div class="notif-time">только что</div>
+            </div>
+          </div>
+        `);
+      }
     });
   } catch (e) {
     console.log('Socket.io not available - running in static mode');

@@ -200,6 +200,11 @@ const Auth = {
     document.getElementById('app').style.display = 'flex';
     this.updateUI();
     Router.navigate(Router.currentPage || 'feed');
+    // Reconnect socket so the server authenticates it with the new login cookie
+    if (window.socketIO && typeof initSocket === 'function') {
+      window.socketIO.disconnect();
+      initSocket();
+    }
   },
 
   onLogout() {
