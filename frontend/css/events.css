@@ -62,21 +62,34 @@
   gap: 5px;
 }
 
-/* Light theme: keep text white since event cards have dark glass bg */
+/* Light theme: darken cards/intro so the white text stays readable */
 [data-theme="light"] .event-card {
   color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+[data-theme="light"] .event-card:hover {
+  background: rgba(0, 0, 0, 0.58);
 }
 [data-theme="light"] .event-card-title {
   color: #fff !important;
 }
 [data-theme="light"] .event-card-desc {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 [data-theme="light"] .event-card-meta {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
+[data-theme="light"] #page-events .section-header {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+[data-theme="light"] #page-events .section-header h1,
 [data-theme="light"] #page-events .section-header h2 {
   color: #fff !important;
+}
+[data-theme="light"] #page-events .section-header p {
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 @media (max-width: 768px) {
