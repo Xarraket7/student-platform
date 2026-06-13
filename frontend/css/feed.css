@@ -26,7 +26,7 @@
 /* Community Icons Grid - 3x2 grid like in mockup */
 .feed-communities-row {
   margin-bottom: 4px;
-  flex: 0 0 63%;
+  flex: 0 0 56%;
   min-height: 0;
   overflow: hidden;
 }
@@ -57,7 +57,7 @@
 /* Posts Section */
 .feed-posts-section {
   margin-bottom: 4px;
-  flex: 0 0 27%;
+  flex: 0 0 34%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -164,11 +164,11 @@
 .post-banner-content {
   width: 100%;
   height: 100%;
-  padding: 10px 22px;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
   overflow-y: auto;
   background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.05) 100%);
 }
@@ -179,8 +179,8 @@
   gap: 10px;
 }
 .post-avatar {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255,255,255,0.3);
@@ -188,7 +188,7 @@
 }
 .post-author-info { flex: 1; }
 .post-author-name {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 600;
   color: #fff;
 }
@@ -199,11 +199,11 @@
 }
 
 .post-content {
-  font-size: 15px;
+  font-size: 17px;
   font-family: var(--font-small);
   color: rgba(255,255,255,0.9);
-  line-height: 1.3;
-  max-width: 60%;
+  line-height: 1.45;
+  max-width: 62%;
 }
 
 .post-detail-btn {
