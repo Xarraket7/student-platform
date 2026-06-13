@@ -186,13 +186,28 @@
   border-radius: 50%;
 }
 
-/* Light theme: white text on dark glass profile */
+/* Light theme: lightly darken panels so the white text stays readable */
+[data-theme="light"] .profile-left,
+[data-theme="light"] .profile-right,
+[data-theme="light"] #page-profile .section-header {
+  background: rgba(0, 0, 0, 0.32);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-theme="light"] .profile-input {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #fff !important;
+}
+[data-theme="light"] .profile-input:not(:disabled) {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: var(--accent);
+}
 [data-theme="light"] .profile-left h2 { color: #fff !important; }
 [data-theme="light"] .profile-role { color: var(--accent) !important; }
-[data-theme="light"] .profile-group { color: rgba(255,255,255,0.5) !important; }
+[data-theme="light"] .profile-group { color: rgba(255,255,255,0.6) !important; }
 [data-theme="light"] .profile-right h3 { color: #fff !important; }
-[data-theme="light"] .profile-field label { color: rgba(255,255,255,0.5) !important; }
-[data-theme="light"] .profile-input { color: #fff !important; }
+[data-theme="light"] .profile-field label { color: rgba(255,255,255,0.65) !important; }
+[data-theme="light"] #page-profile .section-header h1,
 [data-theme="light"] #page-profile .section-header h2 { color: #fff !important; }
 
 @media (max-width: 768px) {
