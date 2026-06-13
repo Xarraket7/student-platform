@@ -32,7 +32,8 @@ const upload = multer({
 router.get('/', (req, res) => {
   try {
     const communities = store.getAll('communities');
-    communities.sort((a, b) => a.id - b.id);
+    // Sort by explicit display order when set, otherwise fall back to id
+    communities.sort((a, b) => (a.order ?? a.id) - (b.order ?? b.id));
     res.json(communities);
   } catch (err) {
     res.status(500).json({ error: err.message });
