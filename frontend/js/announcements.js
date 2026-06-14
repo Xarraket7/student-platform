@@ -8,9 +8,10 @@ const Announcements = {
   async load() {
     try {
       const announcements = await API.get('/announcements');
-      this.list = announcements;
+      // Show only announcements meant for the Announcements page (not feed-only ones)
+      this.list = announcements.filter(a => (a.placement || 'both') !== 'feed');
 
-      if (announcements.length === 0) return;
+      if (this.list.length === 0) return;
 
       // If page is already active, set the background now
       if (this.isActive && this.list.length > 0) {

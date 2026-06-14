@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const store = require('../data/store');
 const { verifyToken, requireAuth, requireAdmin, generateToken } = require('../middleware/auth');
 const multer = require('multer');
@@ -95,6 +96,28 @@ router.put('/:id/role', verifyToken, requireAdmin, (req, res) => {
     const user = store.update('users', req.params.id, { role });
     if (!user) return res.status(404).json({ error: 'Не найден' });
     res.json({ id: user.id, name: user.name, email: user.email, role: user.role });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// Admin: update a user's email and/or password
+router.put('/:id/credentials', verifyToken, requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { email, password } = req.body;
+    const updates = {};
+    if (email && email.trim()) {
+      const exists = store.findOne('users', u => u.email === email.trim() && u.id !== id);
+      if (exists) return res.status(400).json({ error: 'Этот email уже занят' });
+      updates.email = email.trim();
+    }
+    if (password && password.trim()) {
+      if (password.trim().length < 4) return res.status(400).json({ error: 'Пароль слишком короткий (мин. 4 символа)' });
+      updates.password = await bcrypt.hash(password.trim(), 10);
+    }
+    if (Object.keys(updates).length === 0) return res.status(400).json({ error: 'Нечего обновлять' });
+    const user = store.update('users', id, updates);
+    if (!user) return res.status(404).json({ error: 'Не найден' });
+    res.json({ id: user.id, name: user.name, email: user.email });
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 

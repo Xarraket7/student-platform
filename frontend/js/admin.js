@@ -268,6 +268,7 @@ const Admin = {
       e.preventDefault();
       const title = document.getElementById('admin-ann-title').value;
       const description = document.getElementById('admin-ann-desc').value;
+      const placement = document.getElementById('admin-ann-placement').value;
       const imageFile = document.getElementById('admin-ann-image').files[0];
       const bgFile = document.getElementById('admin-ann-bg').files[0];
       if (!title) return showToast('Введите заголовок');
@@ -276,6 +277,7 @@ const Admin = {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
+        formData.append('placement', placement);
         if (imageFile) formData.append('image', imageFile);
         if (bgFile) formData.append('background', bgFile);
 
@@ -293,11 +295,12 @@ const Admin = {
     try {
       const announcements = await API.get('/announcements');
       const list = document.getElementById('admin-announcements-list');
+      const placeLabel = { feed: 'в ленте', announcements: 'в объявлениях', both: 'везде' };
       list.innerHTML = announcements.map(a => `
         <div class="admin-list-item">
           <div class="admin-list-item-info">
             <div class="admin-list-item-title">${a.title}</div>
-            <div class="admin-list-item-meta">${a.description?.substring(0, 60)}...</div>
+            <div class="admin-list-item-meta">${placeLabel[a.placement || 'both']} • ${a.description?.substring(0, 50)}...</div>
           </div>
           <div class="admin-list-item-actions">
             <button class="admin-delete-btn" data-id="${a.id}">Удалить</button>
@@ -481,21 +484,29 @@ const Admin = {
       const users = await API.get('/users');
       const list = document.getElementById('admin-users-list');
       list.innerHTML = users.map(u => `
-        <div class="admin-list-item">
-          <div class="admin-list-item-info" style="display:flex;align-items:center;gap:14px">
-            <img src="assets/avatars/${u.avatar || 'Admin.png'}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0">
-            <div>
-              <div class="admin-list-item-title" style="font-size:16px;font-weight:500">${u.name}</div>
-              <div class="admin-list-item-meta" style="font-size:13px">${u.email || ''} • ${u.role}</div>
+        <div class="admin-user-row">
+          <div class="admin-list-item">
+            <div class="admin-list-item-info" style="display:flex;align-items:center;gap:14px">
+              <img src="assets/avatars/${u.avatar || 'Admin.png'}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0">
+              <div>
+                <div class="admin-list-item-title" style="font-size:16px;font-weight:500">${u.name}</div>
+                <div class="admin-list-item-meta" style="font-size:13px">${u.email || ''} • ${u.role}</div>
+              </div>
+            </div>
+            <div class="admin-list-item-actions">
+              <select class="admin-role-select" data-user-id="${u.id}">
+                <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Админ</option>
+                <option value="teacher" ${u.role === 'teacher' ? 'selected' : ''}>Преподаватель</option>
+                <option value="student" ${u.role === 'student' ? 'selected' : ''}>Студент</option>
+              </select>
+              <button class="admin-edit-btn admin-user-edit-toggle" data-id="${u.id}">Логин/пароль</button>
+              <button class="admin-delete-btn" data-id="${u.id}">Удалить</button>
             </div>
           </div>
-          <div class="admin-list-item-actions">
-            <select class="admin-role-select" data-user-id="${u.id}">
-              <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Админ</option>
-              <option value="teacher" ${u.role === 'teacher' ? 'selected' : ''}>Преподаватель</option>
-              <option value="student" ${u.role === 'student' ? 'selected' : ''}>Студент</option>
-            </select>
-            <button class="admin-delete-btn" data-id="${u.id}">Удалить</button>
+          <div class="admin-user-edit" id="user-edit-${u.id}" style="display:none">
+            <input type="email" class="admin-input admin-user-email" placeholder="Новый email" value="${u.email || ''}">
+            <input type="text" class="admin-input admin-user-password" placeholder="Новый пароль (оставьте пустым, чтобы не менять)">
+            <button class="auth-btn primary-btn admin-user-save" data-id="${u.id}">Сохранить</button>
           </div>
         </div>
       `).join('');
@@ -505,6 +516,28 @@ const Admin = {
           try {
             await API.put(`/users/${select.dataset.userId}/role`, { role: select.value });
             showToast('Роль обновлена');
+          } catch (e) { showToast(e.message); }
+        });
+      });
+
+      list.querySelectorAll('.admin-user-edit-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const panel = document.getElementById(`user-edit-${btn.dataset.id}`);
+          panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+        });
+      });
+
+      list.querySelectorAll('.admin-user-save').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const panel = document.getElementById(`user-edit-${btn.dataset.id}`);
+          const email = panel.querySelector('.admin-user-email').value;
+          const password = panel.querySelector('.admin-user-password').value;
+          if (!email.trim() && !password.trim()) return showToast('Введите email или пароль');
+          try {
+            await API.put(`/users/${btn.dataset.id}/credentials`, { email, password });
+            showToast('Данные обновлены');
+            panel.querySelector('.admin-user-password').value = '';
+            this.loadUsersSection();
           } catch (e) { showToast(e.message); }
         });
       });

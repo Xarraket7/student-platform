@@ -25,17 +25,19 @@ router.post('/', verifyToken, requireAdmin, upload.fields([
 ]), (req, res) => {
   try {
     const { title, description } = req.body;
+    // placement: 'both' (feed + announcements page), 'feed' only, or 'announcements' only
+    const placement = ['feed', 'announcements', 'both'].includes(req.body.placement) ? req.body.placement : 'both';
     const image = req.files?.image ? req.files.image[0].filename : undefined;
     const background = req.files?.background ? req.files.background[0].filename : undefined;
-    const ann = store.insert('announcements', { title, description, image, background });
+    const ann = store.insert('announcements', { title, description, image, background, placement });
     res.json(ann);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 router.put('/:id', verifyToken, requireAdmin, (req, res) => {
   try {
-    const { title, description, image, background } = req.body;
-    const ann = store.update('announcements', req.params.id, { title, description, image, background });
+    const { title, description, image, background, placement } = req.body;
+    const ann = store.update('announcements', req.params.id, { title, description, image, background, placement });
     res.json(ann);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });

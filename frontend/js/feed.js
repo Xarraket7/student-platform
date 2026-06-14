@@ -460,7 +460,14 @@ const Feed = {
     try {
       const announcements = await API.get('/announcements');
       const annContainer = document.getElementById('feed-announcements-list');
-      annContainer.innerHTML = announcements.slice(0, 2).map(a => `
+      // Show only announcements meant for the feed, newest first, max 4.
+      // When a 5th feed announcement is added, the oldest drops off the feed
+      // automatically (it still lives on the Announcements page).
+      const feedAnn = announcements
+        .filter(a => (a.placement || 'both') !== 'announcements')
+        .sort((a, b) => b.id - a.id)
+        .slice(0, 4);
+      annContainer.innerHTML = feedAnn.map(a => `
         <div class="announcement-mini">
           <div class="announcement-mini-title">${a.title}</div>
           <div class="announcement-mini-text">${a.description?.substring(0, 80)}...</div>

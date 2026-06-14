@@ -170,10 +170,26 @@
   outline: none;
 }
 .admin-role-select option {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: #1a1a2e;
+  color: #fff;
   padding: 8px;
 }
+
+/* User credentials edit panel */
+.admin-user-row { margin-bottom: 8px; }
+.admin-user-edit {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 6px 0 0 0;
+  padding: 12px 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+.admin-user-edit .admin-input { flex: 1; min-width: 160px; margin: 0; }
+.admin-user-edit .admin-user-save { width: auto; padding: 10px 20px; white-space: nowrap; }
 
 /* Gallery admin preview */
 .admin-gallery-preview {
@@ -356,6 +372,36 @@
 .event-icon-option.selected img {
   opacity: 1;
 }
+
+/* Light theme: darken admin panels so the text stays readable */
+[data-theme="light"] #page-admin .section-header,
+[data-theme="light"] .admin-sidebar,
+[data-theme="light"] .admin-content {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-theme="light"] #page-admin .section-header h1,
+[data-theme="light"] #page-admin .admin-section h3,
+[data-theme="light"] #page-admin .admin-label,
+[data-theme="light"] #page-admin .admin-file-label,
+[data-theme="light"] #page-admin .admin-list-item-title {
+  color: #fff !important;
+}
+[data-theme="light"] #page-admin .admin-tab { color: rgba(255, 255, 255, 0.75); }
+[data-theme="light"] #page-admin .admin-tab:hover,
+[data-theme="light"] #page-admin .admin-tab.active { color: #fff; background: rgba(255, 255, 255, 0.12); }
+[data-theme="light"] #page-admin .admin-list-item-meta { color: rgba(255, 255, 255, 0.6); }
+[data-theme="light"] #page-admin .admin-input,
+[data-theme="light"] #page-admin .admin-select,
+[data-theme="light"] #page-admin .admin-textarea,
+[data-theme="light"] #page-admin .admin-role-select {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+[data-theme="light"] #page-admin .admin-input::placeholder,
+[data-theme="light"] #page-admin .admin-textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
+[data-theme="light"] #page-admin .admin-list-item { border-color: rgba(255, 255, 255, 0.12); }
 
 @media (max-width: 768px) {
   .admin-layout { flex-direction: column; }
