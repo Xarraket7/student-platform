@@ -374,13 +374,6 @@
 }
 .event-mini:hover { background: var(--bg-glass-hover); }
 .event-mini-icon { width: 34px; height: 34px; }
-/* Dark theme: put colored event icons on a light chip so they're visible */
-[data-theme="dark"] .event-mini-icon,
-[data-theme="dark"] .event-card-icon {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 8px;
-  padding: 3px;
-}
 .event-mini-info { flex: 1; }
 .event-mini-title {
   font-size: 13px;
