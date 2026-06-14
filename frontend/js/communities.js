@@ -5,7 +5,8 @@ window.STATIC_GALLERY = {
   sports: ['Group 3.png', 'image 5.png', 'image 4.png', 'image 6.png', 'image 7.png', 'image 8.png'],
   mobilography: ['342423 3.png', 'image58765 4.png', 'imag70079e 5.png', 'image 787896.png', 'imag87098e 7.png', 'image78098987 8.png'],
   volunteers: ['opera_erdhkybbpd.png', 'opera_hRPr1cGZzr.png', 'opera_6SVOSOfUXB.png', 'opera_qbkzDvm4x8.png', 'opera_rH38aiRYMP.png', 'opera_IEp5JpznAw.png'],
-  parents: ['opera_1ZBohmk0mq.png', 'opera_O4NPl7BbWQ.png', 'opera_OXwx7FFOar.png', 'opera_PAPYs85i2M.png', 'opera_qNzo09B3O0.png', 'opera_vEKB6Ltn7q.png']
+  parents: ['opera_1ZBohmk0mq.png', 'opera_O4NPl7BbWQ.png', 'opera_OXwx7FFOar.png', 'opera_PAPYs85i2M.png', 'opera_qNzo09B3O0.png', 'opera_vEKB6Ltn7q.png'],
+  dormitory: ['5bb.jpg', '16bb.jpg', '2bb.jpg', '1bb.jpg', '7.jpg', 'AEKjinL6NRGaBFyW.jpg', '122.jpg', '12.jpg']
 };
 
 const Communities = {
