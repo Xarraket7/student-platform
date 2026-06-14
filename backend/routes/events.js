@@ -14,15 +14,17 @@ router.get('/', (req, res) => {
 router.post('/', verifyToken, requireAdmin, (req, res) => {
   try {
     const { title, description, icon, event_date, event_time } = req.body;
-    const event = store.insert('events', { title, description, icon, event_date: event_date || null, event_time: event_time || null });
+    // placement: 'both' (feed + events page), 'feed' only, or 'events' only
+    const placement = ['feed', 'events', 'both'].includes(req.body.placement) ? req.body.placement : 'both';
+    const event = store.insert('events', { title, description, icon, event_date: event_date || null, event_time: event_time || null, placement });
     res.json(event);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 router.put('/:id', verifyToken, requireAdmin, (req, res) => {
   try {
-    const { title, description, icon, event_date, event_time } = req.body;
-    const event = store.update('events', req.params.id, { title, description, icon, event_date, event_time });
+    const { title, description, icon, event_date, event_time, placement } = req.body;
+    const event = store.update('events', req.params.id, { title, description, icon, event_date, event_time, placement });
     res.json(event);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });

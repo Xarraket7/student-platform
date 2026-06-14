@@ -435,10 +435,11 @@ const Admin = {
       const icon = document.getElementById('admin-event-icon').value;
       const event_date = document.getElementById('admin-event-date').value;
       const event_time = document.getElementById('admin-event-time').value;
+      const placement = document.getElementById('admin-event-placement').value;
       if (!title) return showToast('Введите название');
 
       try {
-        await API.post('/events', { title, description, icon, event_date, event_time });
+        await API.post('/events', { title, description, icon, event_date, event_time, placement });
         showToast('Событие добавлено');
         document.getElementById('admin-event-title').value = '';
         document.getElementById('admin-event-desc').value = '';
@@ -455,11 +456,12 @@ const Admin = {
     try {
       const events = await API.get('/events');
       const list = document.getElementById('admin-events-list');
+      const placeLabel = { feed: 'в ленте', events: 'в событиях', both: 'везде' };
       list.innerHTML = events.map(e => `
         <div class="admin-list-item">
           <div class="admin-list-item-info">
             <div class="admin-list-item-title">${e.title}</div>
-            <div class="admin-list-item-meta">${e.event_date ? formatDate(e.event_date) : 'Без даты'}</div>
+            <div class="admin-list-item-meta">${placeLabel[e.placement || 'both']} • ${e.event_date ? formatDate(e.event_date) : 'Без даты'}</div>
           </div>
           <div class="admin-list-item-actions">
             <button class="admin-delete-btn" data-id="${e.id}">Удалить</button>

@@ -50,6 +50,14 @@
 }
 .admin-textarea { min-height: 100px; resize: vertical; }
 
+/* Make the date/time picker icons white so they're visible on the dark admin form */
+.admin-input[type="date"]::-webkit-calendar-picker-indicator,
+.admin-input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.85;
+  cursor: pointer;
+}
+
 .slug-input-wrapper {
   position: relative;
 }

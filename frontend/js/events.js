@@ -5,7 +5,10 @@ const Events = {
       const events = await API.get('/events');
       const grid = document.getElementById('events-grid');
 
-      grid.innerHTML = events.map(e => `
+      // Show only events meant for the Events page (not feed-only ones)
+      const pageEvents = events.filter(e => (e.placement || 'both') !== 'feed');
+
+      grid.innerHTML = pageEvents.map(e => `
         <div class="event-card">
           <div class="event-card-header">
             <img src="assets/icons/events/${e.icon}" alt="" class="event-card-icon">
