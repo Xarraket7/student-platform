@@ -446,7 +446,10 @@ const Feed = {
     try {
       const events = await API.get('/events');
       const eventsContainer = document.getElementById('feed-events-list');
-      eventsContainer.innerHTML = events.slice(0, 4).map(e => `
+      // Feed shows the 4 newest events; when a 5th is added the oldest drops off
+      // the feed (it still lives on the Events page).
+      const feedEvents = [...events].sort((a, b) => b.id - a.id).slice(0, 4);
+      eventsContainer.innerHTML = feedEvents.map(e => `
         <div class="event-mini">
           <img src="assets/icons/events/${e.icon}" alt="" class="event-mini-icon">
           <div class="event-mini-info">

@@ -374,6 +374,13 @@
 }
 .event-mini:hover { background: var(--bg-glass-hover); }
 .event-mini-icon { width: 34px; height: 34px; }
+/* Dark theme: put colored event icons on a light chip so they're visible */
+[data-theme="dark"] .event-mini-icon,
+[data-theme="dark"] .event-card-icon {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  padding: 3px;
+}
 .event-mini-info { flex: 1; }
 .event-mini-title {
   font-size: 13px;
@@ -422,14 +429,22 @@
   margin: 0;
 }
 .friends-arrow {
-  font-size: 16px;
+  font-size: 22px;
   color: var(--online-color);
   cursor: pointer;
   transition: var(--transition);
   line-height: 1;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .friends-arrow:hover {
-  transform: translateX(3px);
+  background: var(--bg-glass-hover);
+  transform: translateX(2px);
 }
 .friends-avatars {
   display: flex;
