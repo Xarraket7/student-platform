@@ -23,14 +23,15 @@
     "order": 2
   },
   {
-    "id": 3,
-    "title": "Лабораторная / Практика",
-    "slug": "laboratory",
-    "description": "Научная лаборатория и практика",
-    "background": "microsoft-mahjong-5120x2880-22143 1.png",
-    "icon": "Лабораторная.png",
-    "feed_icon": "Лабораторная.png",
-    "created_at": "2026-01-01T00:00:00.000Z",
+    "id": 8,
+    "title": "Психологи колледжа",
+    "slug": "psychologists",
+    "description": "Психологическая поддержка студентов колледжа",
+    "background": "neon-glow-fuzzy-3840x2160-25873.jpg",
+    "icon": "Психологи.png",
+    "feed_icon": "Психологи.png",
+    "avatar": "Психологи.png",
+    "created_at": "2026-06-01T00:00:00.000Z",
     "order": 3
   },
   {
@@ -77,5 +78,16 @@
     "feed_icon": "Клуб путешествий.png",
     "created_at": "2026-01-01T00:00:00.000Z",
     "order": 7
+  },
+  {
+    "id": 3,
+    "title": "Лабораторная / Практика",
+    "slug": "laboratory",
+    "description": "Научная лаборатория и практика",
+    "background": "microsoft-mahjong-5120x2880-22143 1.png",
+    "icon": "Лабораторная.png",
+    "feed_icon": "Лабораторная.png",
+    "created_at": "2026-01-01T00:00:00.000Z",
+    "order": 8
   }
 ]
